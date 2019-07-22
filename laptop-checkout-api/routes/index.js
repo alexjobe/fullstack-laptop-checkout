@@ -9,7 +9,7 @@ var express = require('express'),
 
 // INDEX
 router.get("/", function(req, res){
-    res.render('index.ejs');
+    res.send("Connected to Laptop Checkout API")
 });
 
 module.exports = router;

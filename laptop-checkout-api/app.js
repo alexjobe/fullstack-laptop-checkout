@@ -11,8 +11,6 @@ app.use(bodyParser.json()); // Required for POST routes
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(cors()); // Required for React to connect to API
-app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/public'));
 
 // ========== REQUIRE ROUTES ========== //
 
