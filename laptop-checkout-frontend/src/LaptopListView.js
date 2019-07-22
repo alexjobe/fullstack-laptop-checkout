@@ -2,14 +2,12 @@ import React, {Component} from 'react';
 import LaptopItem from './LaptopItem';
 import LaptopForm from './LaptopForm';
 import * as apiCalls from './api';
-import CheckoutView from './CheckoutView';
 
 class LaptopListView extends Component {
   constructor(props){
     super(props);
     this.state = {
-      laptops: [],
-      selectedLaptop: null
+      laptops: []
     }
     this.addLaptop = this.addLaptop.bind(this);
   }
@@ -34,17 +32,13 @@ class LaptopListView extends Component {
     this.setState({laptops: laptops});
   }
 
-  async selectLaptop(laptop){
-    this.setState({selectedLaptop: laptop});
-  }
-
   renderLaptopList() {
     const laptops = this.state.laptops.map((laptop) => (
       <LaptopItem
         key={laptop._id}
         laptop={laptop}
         onDelete={this.deleteLaptop.bind(this, laptop._id)}
-        onSelect={this.selectLaptop.bind(this, laptop)}
+        onSelect={this.props.selectLaptop.bind(this, laptop._id)}
       />
     ));
     return (
@@ -58,16 +52,7 @@ class LaptopListView extends Component {
     )
   }
 
-  renderCheckoutView() {
-    return (
-      <CheckoutView laptop={this.state.selectedLaptop} />
-    )
-  }
-
   render(){
-    if(this.state.selectedLaptop){
-      return this.renderCheckoutView();
-    }
     return this.renderLaptopList();
   }
 }

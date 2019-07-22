@@ -4,35 +4,51 @@ import * as apiCalls from './api';
 
 class CheckoutHistory extends Component {
 
-    async deleteCheckout(id){
-      await apiCalls.removeCheckoutFromHistory(this.props.laptop._id, id)
-      await apiCalls.removeCheckout(id);
-      const checkouts = this.props.laptop.checkoutHistory.filter(checkout => checkout._id !== id);
-      this.props.updateCheckouts(checkouts);
-    }
-  
-    renderCheckoutList() {
-      const checkouts = this.props.laptop.checkoutHistory.map((checkout) => (
-        <CheckoutHistoryItem
-          key={checkout._id}
-          checkout={checkout}
-          onDelete={this.deleteCheckout.bind(this, checkout._id)}
-        />
-      ));
-      return (
-        <div>
-          <h1>Checkout History</h1>
-          <ul>
-            {checkouts}
-          </ul>
-        </div>
-      )
-    }
-  
-    render(){
-      return this.renderCheckoutList();
-    }
+  constructor(props){
+    super(props);
+    this.deleteCheckout = this.deleteCheckout.bind(this);
+  }
+
+  async deleteCheckout(checkoutId){
+    await apiCalls.removeCheckoutFromHistory(this.props.laptop._id, checkoutId)
+    await apiCalls.removeCheckout(checkoutId);
+    const checkouts = this.props.laptop.checkoutHistory.filter(checkout => checkout._id !== checkoutId);
+    this.props.updateCheckoutHistory(checkouts);
   }
   
-  export default CheckoutHistory;
+  renderCheckoutList(checkoutHistory) {
+    if(this.props.laptop.currentCheckout) {
+      checkoutHistory = checkoutHistory.filter(checkout => checkout._id !== this.props.laptop.currentCheckout._id);
+    }
+
+    const checkoutList = checkoutHistory.map((checkout) => (
+      <CheckoutHistoryItem
+        key={checkout._id}
+        checkout={checkout}
+        onDelete={this.deleteCheckout.bind(this, checkout._id)}
+      />
+    ));
+    return (
+      <div>
+        <h1>Checkout History</h1>
+        <ul>
+          {checkoutList}
+        </ul>
+      </div>
+    )
+  }
+  
+  render(){
+    if(this.props.laptop.checkoutHistory && this.props.laptop.checkoutHistory.length > 0){
+      return (
+        this.renderCheckoutList(this.props.laptop.checkoutHistory)
+      )
+    }
+    return (
+      <div></div>
+    )
+  }
+}
+  
+export default CheckoutHistory;
   

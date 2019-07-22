@@ -32,7 +32,7 @@ router.post("/", function(req, res){
 // LAPTOP GET - Get a single laptop
 router.get("/:laptopId", function(req, res){
     // Mongo populates currentCheckout based on ObjectID
-    db.Laptop.findById(req.params.laptopId).populate('currentCheckout', 'checkoutHistory')
+    db.Laptop.findById(req.params.laptopId).populate('currentCheckout').populate('checkoutHistory')
     .then(function(foundLaptop){
         res.json(foundLaptop);
     })
@@ -75,7 +75,7 @@ router.delete("/:laptopId/history/:checkoutId", function(req, res){
 // LAPTOP UPDATE - Update a laptop
 router.put("/:laptopId", function(req, res){
     // Mongo populates currentCheckout based on ObjectID
-    db.Laptop.findOneAndUpdate({_id: req.params.laptopId}, req.body, {new: true}).populate('currentCheckout') // {new: true} respond with updated data
+    db.Laptop.findOneAndUpdate({_id: req.params.laptopId}, req.body, {new: true}).populate('currentCheckout').populate('checkoutHistory') // {new: true} respond with updated data
     .then(function(laptop){
         if(req.body.currentCheckout) { // If there is a currentCheckout, set isCheckedOut to true
             laptop.isCheckedOut = true;
