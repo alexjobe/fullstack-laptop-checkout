@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import LaptopItem from './LaptopItem';
 import LaptopForm from './LaptopForm';
-import * as apiCalls from './api';
+import * as apiCalls from '../api';
 
 class LaptopListView extends Component {
   constructor(props){
@@ -39,16 +39,17 @@ class LaptopListView extends Component {
         laptop={laptop}
         onDelete={this.deleteLaptop.bind(this, laptop._id)}
         onSelect={this.props.selectLaptop.bind(this, laptop._id)}
+        isOverdue={laptop.currentCheckout && new Date(laptop.currentCheckout.dueDate) < Date.now()}
       />
     ));
     return (
-      <div>
-        <h1>Laptop List</h1>
-        <ul>
+      <section id="laptopView">
+        <h1><i className="fa fa-laptop"></i> laptop<span>checkout</span></h1> 
+        <ul id="laptopList">
           {laptops}
         </ul>
         <LaptopForm addLaptop={this.addLaptop} />
-      </div>
+      </section>
     )
   }
 

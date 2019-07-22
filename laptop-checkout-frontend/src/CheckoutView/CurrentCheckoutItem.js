@@ -2,7 +2,7 @@ import React from 'react';
 
 const CurrentCheckoutItem = ({checkout, onReturn}) => (
 
-  <div>
+  <div id="currentCheckout">
     <h3>Checked out to:</h3>
     <p>
       Name: {checkout.userName} <br />
@@ -10,7 +10,7 @@ const CurrentCheckoutItem = ({checkout, onReturn}) => (
       Checked Out: {new Date(checkout.checkoutDate).toLocaleDateString('en-US', { timeZone: 'UTC' })} <br />
       Due Date: {new Date(checkout.dueDate).toLocaleDateString('en-US', { timeZone: 'UTC' })}
     </p>
-    <button onClick={onReturn}>Return Laptop</button>
+    <button id="returnButton" onClick={onReturn}>Return Laptop</button>
   </div>
 
 )

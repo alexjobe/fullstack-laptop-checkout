@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as apiCalls from './api';
+import * as apiCalls from '../api';
 import CheckoutForm from './CheckoutForm';
 import CurrentCheckoutItem from './CurrentCheckoutItem';
 import CheckoutHistory from './CheckoutHistory';
@@ -41,20 +41,21 @@ class CheckoutView extends Component {
 
   renderCheckoutForm() {
     return (
-      <div>
+      <section id="checkoutView">
         <BackButton onClick={this.props.selectLaptop.bind(this, null)}></BackButton>
         <h1>{this.state.laptop.name}</h1>
+        <h3 id="available">Available</h3>
         <CheckoutForm
           addCheckout={this.addCheckout.bind(this)}
         />
         <CheckoutHistory laptop={this.state.laptop} updateCheckoutHistory={this.updateCheckoutHistory}/>
-      </div>
+      </section>
     )
   }
 
   renderCurrentCheckout() {
     return (
-      <div>
+      <section id="checkoutView">
         <BackButton onClick={this.props.selectLaptop.bind(this, null)}></BackButton>
         <h1>{this.state.laptop.name}</h1>
         <CurrentCheckoutItem
@@ -62,7 +63,7 @@ class CheckoutView extends Component {
           onReturn={this.returnLaptop.bind(this)}
         />
         <CheckoutHistory laptop={this.state.laptop} updateCheckoutHistory={this.updateCheckoutHistory}/>
-      </div>
+      </section>
     )
   }
 

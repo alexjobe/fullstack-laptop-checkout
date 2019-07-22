@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 
-class CheckoutForm extends Component {
+class LaptopForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userName: '',
-      mgrName: '',
-      dueDate: ''
+      laptopName: '',
+      laptopCode: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,41 +18,36 @@ class CheckoutForm extends Component {
 
   handleSubmit(e){
     e.preventDefault(); // Prevent form from reloading the page on submit
-    var checkout = {
-      userName: this.state.userName,
-      mgrName: this.state.mgrName,
-      dueDate: this.state.dueDate
+    var laptop = {
+      name: this.state.laptopName,
+      serialCode: this.state.laptopCode
     }
-    this.props.addCheckout(checkout);
+    this.props.addLaptop(laptop);
   }
 
   render() {
     return (
-      <form>
+      <form id="laptopInput">
         <input
-          name='userName'
+          name='laptopName'
           type='text' 
-          value={this.state.userName}
+          value={this.state.laptopName}
           onChange={this.handleChange}
+          placeholder='Laptop Name'
         />
         <input 
-          name='mgrName'
+          name='laptopCode'
           type='text'
-          value={this.state.mgrName}
+          value={this.state.laptopCode}
           onChange={this.handleChange}
-        />
-        <input 
-          name='dueDate'
-          type='date'
-          value={this.state.dueDate}
-          onChange={this.handleChange}
+          placeholder='Serial Code'
         />
         <button 
           onClick={this.handleSubmit}
-        >Check out</button>
+        >Add Laptop</button>
       </form>
     )
   }
 }
 
-export default CheckoutForm;
+export default LaptopForm;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import CheckoutHistoryItem from './CheckoutHistoryItem';
-import * as apiCalls from './api';
+import * as apiCalls from '../api';
 
 class CheckoutHistory extends Component {
 
@@ -30,8 +30,8 @@ class CheckoutHistory extends Component {
     ));
     return (
       <div>
-        <h1>Checkout History</h1>
-        <ul>
+        <h3 id="checkoutHistoryTitle">Checkout History</h3>
+        <ul id="checkoutList">
           {checkoutList}
         </ul>
       </div>
