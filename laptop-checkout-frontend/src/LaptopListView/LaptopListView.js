@@ -44,7 +44,8 @@ class LaptopListView extends Component {
     ));
     return (
       <section id="laptopView">
-        <h1><i className="fa fa-laptop"></i> laptop<span>checkout</span></h1> 
+        <h1>MAI</h1>
+        <h2><i className="fa fa-laptop"></i> laptop<span>checkout</span></h2> 
         <ul id="laptopList">
           {laptops}
         </ul>

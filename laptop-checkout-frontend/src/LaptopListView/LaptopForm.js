@@ -22,6 +22,10 @@ class LaptopForm extends Component {
       name: this.state.laptopName,
       serialCode: this.state.laptopCode
     }
+    this.setState({
+      laptopName: '',
+      laptopCode: ''
+    })
     this.props.addLaptop(laptop);
   }
 

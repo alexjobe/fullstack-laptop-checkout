@@ -44,6 +44,7 @@ class CheckoutView extends Component {
       <section id="checkoutView">
         <BackButton onClick={this.props.selectLaptop.bind(this, null)}></BackButton>
         <h1>{this.state.laptop.name}</h1>
+        <h3>{this.state.laptop.serialCode}</h3>
         <h3 id="available">Available</h3>
         <CheckoutForm
           addCheckout={this.addCheckout.bind(this)}
@@ -58,6 +59,7 @@ class CheckoutView extends Component {
       <section id="checkoutView">
         <BackButton onClick={this.props.selectLaptop.bind(this, null)}></BackButton>
         <h1>{this.state.laptop.name}</h1>
+        <h3>{this.state.laptop.serialCode}</h3>
         <CurrentCheckoutItem
           checkout={this.state.laptop.currentCheckout}
           onReturn={this.returnLaptop.bind(this)}
