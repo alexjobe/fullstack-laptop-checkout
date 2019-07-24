@@ -26,6 +26,7 @@ class CheckoutHistory extends Component {
         key={checkout._id}
         checkout={checkout}
         onDelete={this.deleteCheckout.bind(this, checkout._id)}
+        onEdit={this.props.enableEditMode.bind(this, checkout)}
       />
     ));
     return (

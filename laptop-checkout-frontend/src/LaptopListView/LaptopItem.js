@@ -16,9 +16,10 @@ const laptopCodeStyle = {
 }
 
 
-const LaptopItem = ({laptop, isOverdue, onDelete, onSelect}) => (
+const LaptopItem = ({laptop, isOverdue, onDelete, onSelect, onEdit}) => (
   <li className={isOverdue ? "overdue" : ""}>
-    <span className="delete" onClick={onDelete}> X </span>
+    <span className="delete" onClick={onDelete}><i className="fa fa-trash"></i></span>
+    <span className="edit" onClick={onEdit}><i className="fa fa-edit"></i></span>
     <span onClick={onSelect} style={laptopStyle}>
       <span style={laptopNameStyle}><strong>Laptop: </strong>{laptop.name}</span>
       <span style={laptopCodeStyle}><strong> Serial Code: </strong>{laptop.serialCode}</span>

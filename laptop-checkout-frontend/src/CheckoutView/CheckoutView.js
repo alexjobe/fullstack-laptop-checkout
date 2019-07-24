@@ -4,14 +4,17 @@ import CheckoutForm from './CheckoutForm';
 import CurrentCheckoutItem from './CurrentCheckoutItem';
 import CheckoutHistory from './CheckoutHistory';
 import BackButton from './BackButton';
+import EditCheckoutForm from './EditCheckoutForm';
 
 class CheckoutView extends Component {
   constructor(props){
     super(props);
     this.state = {
-      laptop: {}
+      laptop: {},
+      checkoutToUpdate: null
     }
     this.updateCheckoutHistory = this.updateCheckoutHistory.bind(this);
+    this.updateCheckout = this.updateCheckout.bind(this);
   }
 
   componentWillMount() {
@@ -36,45 +39,55 @@ class CheckoutView extends Component {
   }
 
   async updateCheckoutHistory(checkouts){
-    this.setState({laptop: {...this.state.laptop, checkoutHistory: checkouts}});
+    let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, checkoutHistory: checkouts});
+    this.setState({laptop: updatedLaptop});
   }
 
-  renderCheckoutForm() {
-    return (
-      <section id="checkoutView">
-        <BackButton onClick={this.props.selectLaptop.bind(this, null)}></BackButton>
-        <h1>{this.state.laptop.name}</h1>
-        <h3>{this.state.laptop.serialCode}</h3>
-        <h3 id="available">Available</h3>
-        <CheckoutForm
-          addCheckout={this.addCheckout.bind(this)}
-        />
-        <CheckoutHistory laptop={this.state.laptop} updateCheckoutHistory={this.updateCheckoutHistory}/>
-      </section>
-    )
+  async enableEditMode(checkout){
+    this.setState({checkoutToUpdate: checkout});
   }
 
-  renderCurrentCheckout() {
-    return (
-      <section id="checkoutView">
-        <BackButton onClick={this.props.selectLaptop.bind(this, null)}></BackButton>
-        <h1>{this.state.laptop.name}</h1>
-        <h3>{this.state.laptop.serialCode}</h3>
-        <CurrentCheckoutItem
-          checkout={this.state.laptop.currentCheckout}
-          onReturn={this.returnLaptop.bind(this)}
-        />
-        <CheckoutHistory laptop={this.state.laptop} updateCheckoutHistory={this.updateCheckoutHistory}/>
-      </section>
-    )
+  async updateCheckout(val){
+    let updatedCheckout = await apiCalls.updateCheckout(val);
+    const checkouts = this.state.laptop.checkoutHistory.map(checkout => {
+      return (checkout._id === updatedCheckout._id ? updatedCheckout : checkout);
+    });
+    this.updateCheckoutHistory(checkouts);
+    this.setState({checkoutToUpdate: null})
   }
 
   render(){
-    if(this.state.laptop.currentCheckout) {
-      return this.renderCurrentCheckout();
-    }
-    return this.renderCheckoutForm();
-    
+    return (
+      <section id="checkoutView">
+      <BackButton onClick={this.props.selectLaptop.bind(this, null)}></BackButton>
+      <h1>{this.state.laptop.name}</h1>
+      <h3>{this.state.laptop.serialCode}</h3>
+      { (this.state.checkoutToUpdate ?
+          <EditCheckoutForm
+            updateCheckout={this.updateCheckout.bind(this)}
+            checkout={this.state.checkoutToUpdate}
+          /> : ''
+        )
+      }
+      {
+        (this.state.laptop.currentCheckout && !this.state.checkoutToUpdate ?
+          <CurrentCheckoutItem
+            checkout={this.state.laptop.currentCheckout}
+            onReturn={this.returnLaptop.bind(this)}
+          /> : ''
+        )
+      }
+      {
+        (
+          !this.state.laptop.currentCheckout && !this.state.checkoutToUpdate ?
+          <CheckoutForm
+            addCheckout={this.addCheckout.bind(this)}
+          /> : ''
+        )
+      } 
+      <CheckoutHistory laptop={this.state.laptop} updateCheckoutHistory={this.updateCheckoutHistory} enableEditMode={this.enableEditMode.bind(this)}/>
+      </section>
+    )
   }
 }
 

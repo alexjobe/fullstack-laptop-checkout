@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import DueDateInput from './DueDateInput';
+import DateInput from './DateInput';
 
 class CheckoutForm extends Component {
   constructor(props){
@@ -39,32 +39,37 @@ class CheckoutForm extends Component {
 
   render() {
     return (
-      <form id="checkoutInput">
-        <input
-          name='userName'
-          type='text' 
-          value={this.state.userName}
-          onChange={this.handleChange}
-          placeholder='User Name'
-        />
-        <input 
-          name='mgrName'
-          type='text'
-          value={this.state.mgrName}
-          onChange={this.handleChange}
-          placeholder='Approved By'
-        />
-        <DueDateInput 
-          dueDate={this.dueDate} 
-          handleChange={this.handleChange.bind(this)} 
-          handleFocus={this.handleFocus.bind(this)} 
-          handleBlur={this.handleBlur.bind(this)} 
-          hasFocus={this.state.dateHasFocus} >
-        </DueDateInput>
-        <button 
-          onClick={this.handleSubmit}
-        >Check out</button>
-      </form>
+      <section id="checkoutForm">
+        <h3 id="available">Available</h3>
+        <form id="checkoutInput">
+          <input
+            name='userName'
+            type='text' 
+            value={this.state.userName}
+            onChange={this.handleChange}
+            placeholder='User Name'
+          />
+          <input 
+            name='mgrName'
+            type='text'
+            value={this.state.mgrName}
+            onChange={this.handleChange}
+            placeholder='Approved By'
+          />
+          <DateInput
+            name='dueDate'
+            placeholder='Due Date'
+            value={this.state.dueDate} 
+            handleChange={this.handleChange.bind(this)} 
+            handleFocus={this.handleFocus.bind(this)} 
+            handleBlur={this.handleBlur.bind(this)} 
+            hasFocus={this.state.dateHasFocus} >
+          </DateInput>
+          <button 
+            onClick={this.handleSubmit}
+          >Check out</button>
+        </form>
+      </section>
     )
   }
 }

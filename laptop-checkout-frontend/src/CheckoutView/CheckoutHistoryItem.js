@@ -25,9 +25,10 @@ const dueDateStyle = {
   width: '100%'
 };
 
-const CheckoutHistoryItem = ({checkout, onDelete}) => (
+const CheckoutHistoryItem = ({checkout, onDelete, onEdit}) => (
   <li>
-    <span className="delete" onClick={onDelete}> X </span>
+    <span className="delete" onClick={onDelete}><i className="fa fa-trash"></i></span>
+    <span className="edit" onClick={onEdit}><i className="fa fa-edit"></i></span>
     <span style={checkoutStyle}>
       <span style={nameStyle}><strong>Name:</strong> {checkout.userName}</span>
       <span style={nameStyle}><strong>Approved By:</strong> {checkout.mgrName}</span>

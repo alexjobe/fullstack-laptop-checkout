@@ -67,6 +67,20 @@ li:hover {
     opacity: 1;
 }
 
+.edit {
+    margin: 0 10px;
+    color: #00a838;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: rotate(0);
+}
+
+.edit:hover {
+    color: #04e44f;
+    opacity: 1;
+}
+  
+
 .overdue {
     background: rgba(255, 56, 56, 1);
 }
