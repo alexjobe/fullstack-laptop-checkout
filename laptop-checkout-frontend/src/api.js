@@ -1,5 +1,5 @@
-const LAPTOP_URL = 'http://localhost:3000/api/laptops/';
-const CHECKOUT_URL = 'http://localhost:3000/api/checkouts/';
+const LAPTOP_URL = 'http://localhost:8080/api/laptops/';
+const CHECKOUT_URL = 'http://localhost:8080/api/checkouts/';
 
 export async function getLaptops() {
   return fetch(LAPTOP_URL)

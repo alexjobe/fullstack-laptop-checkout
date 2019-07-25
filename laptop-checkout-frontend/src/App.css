@@ -115,7 +115,9 @@ input {
 	border: none;
 	border-bottom: 1px solid #34495e;
 	outline: none;
-	font: 50 28px 'Ubuntu', sans-serif;
+    font-weight: 50;
+    font-size: 28px;
+    font-family: 'Montserrat', sans-serif;
 	padding: 20px;
 	color: #34495e;
 }
