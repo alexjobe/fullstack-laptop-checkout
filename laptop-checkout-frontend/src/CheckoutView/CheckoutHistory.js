@@ -41,9 +41,16 @@ class CheckoutHistory extends Component {
   
   render(){
     if(this.props.laptop.checkoutHistory && this.props.laptop.checkoutHistory.length > 0){
-      return (
-        this.renderCheckoutList(this.props.laptop.checkoutHistory)
-      )
+      if(!this.props.laptop.currentCheckout) {
+        return (
+          this.renderCheckoutList(this.props.laptop.checkoutHistory)
+        )
+      }
+      if(this.props.laptop.currentCheckout && this.props.laptop.checkoutHistory.length > 1) {
+        return (
+          this.renderCheckoutList(this.props.laptop.checkoutHistory)
+        )
+      }
     }
     return (
       <div></div>

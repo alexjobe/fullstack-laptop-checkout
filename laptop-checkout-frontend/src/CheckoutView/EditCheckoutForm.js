@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DateInput from './DateInput';
+import NameInput from './NameInput';
 
 class EditCheckoutForm extends Component {
   constructor(props){
@@ -7,13 +8,25 @@ class EditCheckoutForm extends Component {
     this.state = {
       userName: this.props.checkout.userName,
       mgrName: this.props.checkout.mgrName,
-      dueDate: new Date(this.props.checkout.dueDate).toISOString().substring(0, 10),
-      checkoutDate: new Date(this.props.checkout.checkoutDate).toISOString().substring(0, 10),
-      returnDate: new Date(this.props.checkout.returnDate).toISOString().substring(0, 10)
+      dueDate: '',
+      checkoutDate: '',
+      returnDate: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    if(this.props.checkout.dueDate) {
+      this.setState({dueDate: new Date(this.props.checkout.dueDate).toISOString().substring(0, 10)});
+    }
+    if(this.props.checkout.checkoutDate) {
+      this.setState({checkoutDate: new Date(this.props.checkout.checkoutDate).toISOString().substring(0, 10)});
+    }
+    if(this.props.checkout.returnDate) {
+      this.setState({returnDate: new Date(this.props.checkout.returnDate).toISOString().substring(0, 10)});
+    }
   }
 
   handleChange(e){
@@ -35,38 +48,39 @@ class EditCheckoutForm extends Component {
     if(this.props.checkout) {
       return (
         <form id="checkoutInput">
-          <input
+          <NameInput
             name='userName'
-            type='text' 
             value={this.state.userName}
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(this)}
             placeholder='User Name'
           />
-          <input 
+          <NameInput
             name='mgrName'
-            type='text'
             value={this.state.mgrName}
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(this)}
             placeholder='Approved By'
           />
           <DateInput
             name='checkoutDate'
             placeholder='Checkout Date'
             value={this.state.checkoutDate} 
-            handleChange={this.handleChange.bind(this)} >
+            onChange={this.handleChange.bind(this)} >
           </DateInput>
           <DateInput
             name='dueDate'
             placeholder='Due Date'
             value={this.state.dueDate} 
-            handleChange={this.handleChange.bind(this)} >
+            onChange={this.handleChange.bind(this)} >
           </DateInput>
-          <DateInput
-            name='returnDate'
-            placeholder='Return Date'
-            value={this.state.returnDate} 
-            handleChange={this.handleChange.bind(this)} >
-          </DateInput>
+          {this.props.checkout.returnDate ?
+            <DateInput
+              name='returnDate'
+              placeholder='Return Date'
+              value={this.state.returnDate} 
+              onChange={this.handleChange.bind(this)} >
+            </DateInput>
+            : ''
+          }
           <button 
             onClick={this.handleSubmit}
           >Update Checkout</button>

@@ -27,6 +27,16 @@ li {
     justify-content: space-between;
 }
 
+p {
+    text-align: left;
+    margin: 0;
+}
+
+#currentCheckoutInfo {
+    display: flex;
+    justify-content: center;
+}
+
 #checkoutList li {
     font-size: 20px;
 }

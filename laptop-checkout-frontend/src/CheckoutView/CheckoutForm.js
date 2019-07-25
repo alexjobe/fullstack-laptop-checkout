@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DateInput from './DateInput';
+import NameInput from './NameInput';
 
 class CheckoutForm extends Component {
   constructor(props){
@@ -42,16 +43,14 @@ class CheckoutForm extends Component {
       <section id="checkoutForm">
         <h3 id="available">Available</h3>
         <form id="checkoutInput">
-          <input
+          <NameInput
             name='userName'
-            type='text' 
             value={this.state.userName}
             onChange={this.handleChange}
             placeholder='User Name'
           />
-          <input 
+          <NameInput 
             name='mgrName'
-            type='text'
             value={this.state.mgrName}
             onChange={this.handleChange}
             placeholder='Approved By'
@@ -60,10 +59,7 @@ class CheckoutForm extends Component {
             name='dueDate'
             placeholder='Due Date'
             value={this.state.dueDate} 
-            handleChange={this.handleChange.bind(this)} 
-            handleFocus={this.handleFocus.bind(this)} 
-            handleBlur={this.handleBlur.bind(this)} 
-            hasFocus={this.state.dateHasFocus} >
+            onChange={this.handleChange.bind(this)}>
           </DateInput>
           <button 
             onClick={this.handleSubmit}
