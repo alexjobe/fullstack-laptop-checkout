@@ -8,8 +8,7 @@ class CheckoutForm extends Component {
     this.state = {
       userName: '',
       mgrName: '',
-      dueDate: '',
-      dateHasFocus: false
+      dueDate: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,25 +16,20 @@ class CheckoutForm extends Component {
   }
 
   handleChange(e){
+    // [e.target.name] is a computed property name
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e){
     e.preventDefault(); // Prevent form from reloading the page on submit
+    // Create checkout object
     var checkout = {
       userName: this.state.userName,
       mgrName: this.state.mgrName,
       dueDate: this.state.dueDate
     }
+    // Call addCheckout(), which is passed from CheckoutView as a prop
     this.props.addCheckout(checkout);
-  }
-
-  handleBlur() {
-    this.setState({dateHasFocus: false});
-  }
-
-  handleFocus() {
-    this.setState({dateHasFocus: true});
   }
 
   render() {
@@ -59,7 +53,7 @@ class CheckoutForm extends Component {
             name='dueDate'
             placeholder='Due Date'
             value={this.state.dueDate} 
-            onChange={this.handleChange.bind(this)}>
+            onChange={this.handleChange}>
           </DateInput>
           <button 
             onClick={this.handleSubmit}

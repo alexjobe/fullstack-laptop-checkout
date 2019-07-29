@@ -40,6 +40,19 @@ nodejs):
 	npm start
 
 ---------------------------------------------------------------------------------------------------
+------------------------------------------- Database Set-up ---------------------------------------
+---------------------------------------------------------------------------------------------------
+
+You do not need to install MongoDB for this version of the app: it will connect to a test database 
+on MongoLab. However, eventually you will want to set up a permanent database. The database 
+connection is specified in "models/index.js" ('mongodb://localhost/laptop-checkout-api' by default)
+
+How To Install MongoDB Locally:
+	https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mdb-edition
+
+This app uses Mongoose to model data: schemas are defined under models (laptop.js and checkout.js)
+
+---------------------------------------------------------------------------------------------------
 ---------------------------------------------- Electron -------------------------------------------
 ---------------------------------------------------------------------------------------------------
 
@@ -52,7 +65,8 @@ check out:
 	https://www.christianengvall.se/electron-packager-tutorial/ 
 
 After you create an executable with Electron Packager, you do not need to install NodeJS. The only 
-set-up required is installing MongoDB, either locally or on a server.
+set-up required is installing MongoDB, either locally or on a server (make sure the connection is
+specified *before* creating the executable.)
 
 To disable Electron, open package.json and change "main" to "app.js", and "start" to "node ." Then 
 connect to localhost:8080 in a browser. Alternatively, just type “node app.js”. This is required if 
@@ -75,7 +89,7 @@ The API is defined in the routes and models directories. The entry point for the
 app.js, and routes are defined in the routes directory. You can access the API in the browser by 
 typing "/api/laptops" and "/api/checkouts". 
 
-For example, to access a specific laptop, type "http://localhost:8080/api/laptops/_id", where _id 
+For example, to access a specific laptop, type 'http://localhost:8080/api/laptops/_id', where _id 
 is the ObjectId (primary key) for that laptop.
 
 ---------------------------------------------------------------------------------------------------
@@ -92,7 +106,8 @@ Excluding some minor changes in package.json and app.js, the production folder i
 backend folder. 
 
 If changes are made to the frontend, just run “npm run build” and copy the build folder it creates 
-over to the production folder.
+over to the production folder. If changes are made to the backend, update the production folder
+accordingly.
 
 While developing, you must run both the backend and frontend at the same time. Just run the command 
 “npm start” in both the backend and frontend folders. By default, the backend can be accessed at 

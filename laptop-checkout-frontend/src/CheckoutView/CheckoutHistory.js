@@ -10,17 +10,22 @@ class CheckoutHistory extends Component {
   }
 
   async deleteCheckout(checkoutId){
+    // Remove checkout from selected laptop's history
     await apiCalls.removeCheckoutFromHistory(this.props.laptop._id, checkoutId)
+    // Delete checkout
     await apiCalls.removeCheckout(checkoutId);
+    // Update state in CheckoutView
     const checkouts = this.props.laptop.checkoutHistory.filter(checkout => checkout._id !== checkoutId);
     this.props.updateCheckoutHistory(checkouts);
   }
   
   renderCheckoutList(checkoutHistory) {
+    // If there is a currentCheckout, do not include it in checkoutHistory
     if(this.props.laptop.currentCheckout) {
       checkoutHistory = checkoutHistory.filter(checkout => checkout._id !== this.props.laptop.currentCheckout._id);
     }
 
+    // For each checkout in checkoutHistory, render a CheckoutHistoryItem
     const checkoutList = checkoutHistory.map((checkout) => (
       <CheckoutHistoryItem
         key={checkout._id}
@@ -40,6 +45,8 @@ class CheckoutHistory extends Component {
   }
   
   render(){
+    // Only render checkout history if laptop's checkoutHistory isn't empty, AND it contains checkouts besides the
+    // currentCheckout
     if(this.props.laptop.checkoutHistory && this.props.laptop.checkoutHistory.length > 0){
       if(!this.props.laptop.currentCheckout) {
         return (

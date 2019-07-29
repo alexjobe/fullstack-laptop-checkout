@@ -13,18 +13,22 @@ class EditLaptopForm extends Component {
   }
 
   handleChange(e){
+    // [e.target.name] is a computed property name
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e){
     e.preventDefault(); // Prevent form from reloading the page on submit
+    // Update laptop object
     var laptop = this.props.laptop;
     laptop.name = this.state.laptopName;
     laptop.serialCode = this.state.laptopCode;
+    // Clear form
     this.setState({
       laptopName: '',
       laptopCode: ''
     })
+    // Call updateLaptop(), which is passed from LaptopListView as a prop
     this.props.updateLaptop(laptop);
   }
 

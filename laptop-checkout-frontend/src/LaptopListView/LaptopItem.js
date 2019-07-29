@@ -17,7 +17,7 @@ const laptopCodeStyle = {
 
 
 const LaptopItem = ({laptop, isOverdue, onDelete, onSelect, onEdit}) => (
-  <li className={isOverdue ? "overdue" : ""}>
+  <li className={isOverdue ? "overdue" : ""}> {/* If laptop is overdue, apply class 'overdue' */}
     <span className="delete" onClick={onDelete}><i className="fa fa-trash"></i></span>
     <span className="edit" onClick={onEdit}><i className="fa fa-edit"></i></span>
     <span onClick={onSelect} style={laptopStyle}>

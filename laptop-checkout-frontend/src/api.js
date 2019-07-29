@@ -1,6 +1,10 @@
 const LAPTOP_URL = 'http://localhost:8080/api/laptops/';
 const CHECKOUT_URL = 'http://localhost:8080/api/checkouts/';
 
+// --------------------------------------------- //
+// API functions for making calls to the backend //
+// --------------------------------------------- //
+
 export async function getLaptops() {
   return fetch(LAPTOP_URL)
     .then(resp => {
