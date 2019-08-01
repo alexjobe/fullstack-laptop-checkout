@@ -39,13 +39,21 @@ class EditCheckoutForm extends Component {
     e.preventDefault(); // Prevent form from reloading the page on submit
     // Create checkout object with updated form data
     var checkout = this.props.checkout;
-    checkout.userName = this.state.userName;
-    checkout.mgrName = this.state.mgrName;
-    checkout.dueDate = this.state.dueDate;
-    checkout.checkoutDate = this.state.checkoutDate;
-    checkout.returnDate = this.state.returnDate;
+      checkout.userName = this.state.userName;
+      checkout.mgrName = this.state.mgrName;
+      checkout.dueDate = this.state.dueDate;
+      checkout.checkoutDate = this.state.checkoutDate;
     // Update checkout
-    this.props.updateCheckout(checkout);
+    if(this.props.checkout.returnDate) {
+      // Check to make sure inputs are not empty
+      if(this.state.userName && this.state.mgrName && this.state.dueDate && this.state.checkoutDate && this.state.returnDate) {
+        checkout.returnDate = this.state.returnDate;
+        this.props.updateCheckout(checkout);
+      }
+    }
+    else if(this.state.userName && this.state.mgrName && this.state.dueDate && this.state.checkoutDate) {
+        this.props.updateCheckout(checkout);
+    }
   }
   
   render() {

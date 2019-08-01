@@ -32,9 +32,9 @@ class CheckoutView extends Component {
 
   async addCheckout(checkout){
     // Create new checkout, and set its laptop to currently selected laptop
-    let newCheckout = await apiCalls.createCheckout({...checkout, laptop: this.state.laptop._id}); // ... is the spread operator
+    let newCheckout = await apiCalls.createCheckout({...checkout});
     // Update laptop's currentCheckout to newCheckout, and update state
-    let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, currentCheckout: newCheckout});
+    let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, currentCheckout: newCheckout}); // ... is the spread operator
     this.setState({laptop: updatedLaptop});
   }
 

@@ -29,8 +29,10 @@ class LaptopForm extends Component {
       laptopName: '',
       laptopCode: ''
     })
-    // Call addLaptop(), which is passed from LaptopListView as a prop
-    this.props.addLaptop(laptop);
+    if(this.state.laptopName && this.state.laptopCode) {
+      // Call addLaptop(), which is passed from LaptopListView as a prop
+      this.props.addLaptop(laptop);
+    }
   }
 
   render() {

@@ -28,8 +28,10 @@ class CheckoutForm extends Component {
       mgrName: this.state.mgrName,
       dueDate: this.state.dueDate
     }
-    // Call addCheckout(), which is passed from CheckoutView as a prop
-    this.props.addCheckout(checkout);
+    if(this.state.userName && this.state.mgrName && this.state.dueDate) {
+      // Call addCheckout(), which is passed from CheckoutView as a prop
+      this.props.addCheckout(checkout);
+    }
   }
 
   render() {
