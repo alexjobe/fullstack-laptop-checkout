@@ -23,13 +23,17 @@ class EditLaptopForm extends Component {
     var laptop = this.props.laptop;
     laptop.name = this.state.laptopName;
     laptop.serialCode = this.state.laptopCode;
+    
+    // Call updateLaptop(), which is passed from LaptopListView as a prop
+    if(this.state.laptopName && this.state.laptopCode) {
+      this.props.updateLaptop(laptop);
+    }
+
     // Clear form
     this.setState({
       laptopName: '',
       laptopCode: ''
     })
-    // Call updateLaptop(), which is passed from LaptopListView as a prop
-    this.props.updateLaptop(laptop);
   }
 
   render() {

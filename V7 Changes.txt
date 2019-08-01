@@ -1,0 +1,41 @@
+V7 Changes
+
+- Remove superfluous bindings and add additional comments and documentation
+- Prevent users from submitting incomplete forms, which can cause errors
+- Update lite version to use React
+
+---------------------------------------------------------------------------------------------------
+
+V6 Changes
+
+- Completely migrate frontend to React, and remove jQuery
+- Add ability to update existing laptop and checkout information
+- Styling changes
+
+V5 Changes
+
+- Introduce a new "lite" version of the app that does not require a database connection. Once
+packaged into an executable, this version does not require any set-up. The data is only stored 
+locally however, so it is not as secure as connecting to a database.
+
+- Change the update history route to a delete route that takes a checkoutId and deletes that 
+checkout from the laptop's checkoutHistory
+
+V4 Changes
+
+- Split JS functions into separate files and classes
+- Update CSS
+- Include Font Awesome icons
+
+V3 Changes
+
+- Add return button that clears currentCheckout and sets isCheckedOut to false
+- Display checkout history
+- Add ability to remove a checkout from laptop checkoutHistory
+- Add delete 'X' spans to laptop list and checkout list
+
+V2 Changes
+
+- Laptops that are overdue are now highlighted in red
+- Add laptop delete button: when a laptop is deleted, deletes all checkouts associated with that 
+laptop

@@ -54,13 +54,15 @@ class CheckoutView extends Component {
 
   async enableEditMode(checkout){
     // Set checkoutToUpdate to checkout
-    this.setState({checkoutToUpdate: checkout});
+    if(!this.state.checkoutToUpdate) {
+      this.setState({checkoutToUpdate: checkout});
+    }
   }
 
   async updateCheckout(checkout){
     // Update checkout
     let updatedCheckout = await apiCalls.updateCheckout(checkout);
-    if(updatedCheckout.returnDate){ // If we are editing the current checkout, we do not want to add it to checkoutHistory yet
+    if(updatedCheckout && updatedCheckout.returnDate){ // If we are editing the current checkout, we do not want to add it to checkoutHistory yet
       const checkouts = this.state.laptop.checkoutHistory.map(checkout => {
         return (checkout._id === updatedCheckout._id ? updatedCheckout : checkout);
       });

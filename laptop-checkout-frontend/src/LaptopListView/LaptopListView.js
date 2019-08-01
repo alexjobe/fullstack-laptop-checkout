@@ -13,6 +13,7 @@ class LaptopListView extends Component {
     }
     this.addLaptop = this.addLaptop.bind(this);
     this.updateLaptop = this.updateLaptop.bind(this);
+    this.enableEditMode = this.enableEditMode.bind(this);
   }
 
   componentWillMount(){
