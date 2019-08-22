@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
+import DateInput from '../General/DateInput';
+import NameInput from '../General/NameInput';
 
 class EditLaptopForm extends Component {
   constructor(props){
     super(props);
     this.state = {
       laptopName: this.props.laptop.name,
-      laptopCode: this.props.laptop.serialCode
+      leaseDate: this.props.laptop.leaseDate
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    // Set state with formatted dates
+    if(this.props.laptop.leaseDate) {
+      this.setState({leaseDate: new Date(this.props.laptop.leaseDate).toISOString().substring(0, 10)});
+    }
   }
 
   handleChange(e){
@@ -22,17 +31,17 @@ class EditLaptopForm extends Component {
     // Update laptop object
     var laptop = this.props.laptop;
     laptop.name = this.state.laptopName;
-    laptop.serialCode = this.state.laptopCode;
+    laptop.leaseDate = this.state.leaseDate;
     
     // Call updateLaptop(), which is passed from LaptopListView as a prop
-    if(this.state.laptopName && this.state.laptopCode) {
+    if(this.state.laptopName) {
       this.props.updateLaptop(laptop);
     }
 
     // Clear form
     this.setState({
       laptopName: '',
-      laptopCode: ''
+      leaseDate: ''
     })
   }
 
@@ -40,20 +49,18 @@ class EditLaptopForm extends Component {
     if(this.props.laptop) {
       return (
         <form id="laptopInput">
-          <input
+          <NameInput
             name='laptopName'
-            type='text' 
             value={this.state.laptopName}
             onChange={this.handleChange}
             placeholder='Laptop Name'
           />
-          <input 
-            name='laptopCode'
-            type='text'
-            value={this.state.laptopCode}
-            onChange={this.handleChange}
-            placeholder='Serial Code'
-          />
+          <DateInput
+            name='leaseDate'
+            placeholder='Lease Date'
+            value={this.state.leaseDate} 
+            onChange={this.handleChange}>
+          </DateInput>
           <button 
             onClick={this.handleSubmit}
           >Update Laptop</button>

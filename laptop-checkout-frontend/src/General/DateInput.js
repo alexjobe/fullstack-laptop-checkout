@@ -22,16 +22,17 @@ class DateInput extends Component {
 
   render() {
     var placeholder = this.props.placeholder;
+    var formattedDate = new Date(this.props.value).toLocaleDateString('en-US', { timeZone: 'UTC' });
     if(this.props.value) {
       // If value is passed as a prop, render placeholder and formatted value, for example: "Due Date: 1/2/1999" where
       // placeholder is "Due Date" and value is the date to be formatted
-      placeholder = placeholder + ': ' + new Date(this.props.value).toLocaleDateString('en-US', { timeZone: 'UTC' })
+      placeholder = placeholder + ': ' + formattedDate;
     }
     return (
       <input 
         name={this.props.name}
         type={this.state.dateHasFocus? 'date' : 'text'}
-        value={this.state.dateHasFocus? this.props.value : ''}
+        value={this.state.dateHasFocus && this.props.value? this.props.value : ''}
         onChange={this.props.onChange}
         placeholder={placeholder}
         onFocus = {this.handleFocus}

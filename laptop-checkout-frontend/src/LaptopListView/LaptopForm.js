@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
+import DateInput from '../General/DateInput';
+import NameInput from '../General/NameInput';
 
 class LaptopForm extends Component {
   constructor(props){
     super(props);
     this.state = {
       laptopName: '',
-      laptopCode: ''
+      leaseDate: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,14 +24,14 @@ class LaptopForm extends Component {
     // Create laptop object
     var laptop = {
       name: this.state.laptopName,
-      serialCode: this.state.laptopCode
+      leaseDate: this.state.leaseDate
     }
     // Clear form
     this.setState({
       laptopName: '',
-      laptopCode: ''
+      leaseDate: ''
     })
-    if(this.state.laptopName && this.state.laptopCode) {
+    if(this.state.laptopName) {
       // Call addLaptop(), which is passed from LaptopListView as a prop
       this.props.addLaptop(laptop);
     }
@@ -38,20 +40,18 @@ class LaptopForm extends Component {
   render() {
     return (
       <form id="laptopInput">
-        <input
+        <NameInput
           name='laptopName'
-          type='text' 
           value={this.state.laptopName}
           onChange={this.handleChange}
           placeholder='Laptop Name'
         />
-        <input 
-          name='laptopCode'
-          type='text'
-          value={this.state.laptopCode}
-          onChange={this.handleChange}
-          placeholder='Serial Code'
-        />
+        <DateInput
+          name='leaseDate'
+          placeholder='Lease Date'
+          value={this.state.leaseDate} 
+          onChange={this.handleChange}>
+        </DateInput>
         <button 
           onClick={this.handleSubmit}
         >Add Laptop</button>

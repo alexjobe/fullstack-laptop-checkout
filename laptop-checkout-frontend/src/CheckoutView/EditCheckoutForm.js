@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import DateInput from './DateInput';
-import NameInput from './NameInput';
+import DateInput from '../General/DateInput';
+import NameInput from '../General/NameInput';
 
 class EditCheckoutForm extends Component {
   constructor(props){

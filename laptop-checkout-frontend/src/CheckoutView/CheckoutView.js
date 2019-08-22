@@ -3,7 +3,7 @@ import * as apiCalls from '../api';
 import CheckoutForm from './CheckoutForm';
 import CurrentCheckoutItem from './CurrentCheckoutItem';
 import CheckoutHistory from './CheckoutHistory';
-import BackButton from './BackButton';
+import BackButton from '../General/BackButton';
 import EditCheckoutForm from './EditCheckoutForm';
 
 class CheckoutView extends Component {
@@ -79,8 +79,12 @@ class CheckoutView extends Component {
         {/* deselectLaptop() is passed from App. When BackButton is clicked, 
         sets selectedLaptop to null, so App will render LaptopListView */}
         <BackButton onClick={this.props.deselectLaptop}></BackButton>
-        <h1>{this.state.laptop.name}</h1>
-        <h3>#{this.state.laptop.serialCode}</h3>
+        <h1>Laptop: {this.state.laptop.name}</h1>
+        <h3>
+          Lease Date: {this.state.laptop.leaseDate ? new Date(this.state.laptop.leaseDate).toLocaleDateString('en-US', { timeZone: 'UTC' })
+            : 'N/A'
+          }
+        </h3>
         { // If there is a checkoutToUpdate, render EditCheckoutForm
           (this.state.checkoutToUpdate ?
             <EditCheckoutForm

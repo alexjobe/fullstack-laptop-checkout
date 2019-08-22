@@ -27,7 +27,9 @@ class App extends Component {
   renderLaptopListView() {
     return (
       <div className="App">
-        <LaptopListView selectLaptop={this.selectLaptop} />
+        <LaptopListView 
+          selectLaptop={this.selectLaptop} 
+        />
       </div>
     )
   }
@@ -35,7 +37,10 @@ class App extends Component {
   renderCheckoutView() {
     return (
       <div className="App">
-        <CheckoutView laptopId={this.state.selectedLaptop} deselectLaptop={this.deselectLaptop} />
+        <CheckoutView 
+          laptopId={this.state.selectedLaptop} 
+          deselectLaptop={this.deselectLaptop} 
+        />
       </div>
     )
   }

@@ -22,7 +22,12 @@ const LaptopItem = ({laptop, isOverdue, onDelete, onSelect, onEdit}) => (
     <span className="edit" onClick={onEdit}><i className="fa fa-edit"></i></span>
     <span onClick={onSelect} style={laptopStyle}>
       <span style={laptopNameStyle}><strong>Laptop: </strong>{laptop.name}</span>
-      <span style={laptopCodeStyle}><strong> Serial Code: </strong>{laptop.serialCode}</span>
+      <span style={laptopCodeStyle}>
+        <strong> Lease Date: </strong>
+        {laptop.leaseDate ? new Date(laptop.leaseDate).toLocaleDateString('en-US', { timeZone: 'UTC' })
+          : 'N/A'
+        }
+      </span>
     </span>
   </li>
 )

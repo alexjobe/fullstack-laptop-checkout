@@ -12,7 +12,7 @@ const frontendPath = '../laptop-checkout-frontend';
 app.use(bodyParser.json()); // Required for POST routes
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
-app.use(cors()); // Required for React to connect to API
+app.use(cors()); // Required for React frontend to connect to API
 app.use(express.static(path.join(frontendPath, 'build')));
 
 // ========== REQUIRE ROUTES ========== //

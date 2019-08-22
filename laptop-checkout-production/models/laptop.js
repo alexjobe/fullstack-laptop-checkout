@@ -6,9 +6,9 @@ var laptopSchema = new mongoose.Schema({
         type: String,
         required: 'Name cannot be blank'
     },
-    serialCode: {
-        type: String,
-        required: 'Serial code cannot be blank'
+    leaseDate: {
+        type: Date,
+        default: Date.now
     },
     isCheckedOut: {type: Boolean, default: false},
     currentCheckout: {
