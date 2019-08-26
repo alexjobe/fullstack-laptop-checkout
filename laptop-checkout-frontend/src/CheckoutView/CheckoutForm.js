@@ -7,6 +7,7 @@ class CheckoutForm extends Component {
     super(props);
     this.state = {
       userName: '',
+      userEmail: '',
       mgrName: '',
       dueDate: ''
     };
@@ -25,6 +26,7 @@ class CheckoutForm extends Component {
     // Create checkout object
     var checkout = {
       userName: this.state.userName,
+      userEmail: this.state.userEmail,
       mgrName: this.state.mgrName,
       dueDate: this.state.dueDate
     }
@@ -44,6 +46,12 @@ class CheckoutForm extends Component {
             value={this.state.userName}
             onChange={this.handleChange}
             placeholder='User Name'
+          />
+          <NameInput
+            name='userEmail'
+            value={this.state.userEmail}
+            onChange={this.handleChange}
+            placeholder='Email'
           />
           <NameInput 
             name='mgrName'

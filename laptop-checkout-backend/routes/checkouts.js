@@ -1,6 +1,6 @@
 var express = require('express'),
-    router = express.Router();
-    var db = require('../models');
+    router = express.Router(),
+    db = require('../models');
 
 //======================================================//
 //                   CHECKOUT ROUTES                    //

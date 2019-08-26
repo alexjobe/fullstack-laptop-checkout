@@ -18,6 +18,7 @@ app.use(express.static(path.join(frontendPath, 'build')));
 // ========== REQUIRE ROUTES ========== //
 var laptopRoutes = require("./routes/laptops");
 var checkoutRoutes = require("./routes/checkouts");
+var notifyRoutes = require("./routes/emailNotify");
 
 // USE ROUTES
 app.get('/', function (res) {
@@ -25,6 +26,7 @@ app.get('/', function (res) {
 });
 app.use('/api/laptops', laptopRoutes);
 app.use('/api/checkouts', checkoutRoutes);
+app.use('/notify', notifyRoutes);
 
 // START SERVER
 app.listen(port, "localhost", function(){

@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var checkoutSchema = new mongoose.Schema({
     userName: String,
     mgrName: String,
+    userEmail: String,
     checkoutDate: {
         type: Date,
         default: Date.now

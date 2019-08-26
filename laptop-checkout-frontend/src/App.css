@@ -149,6 +149,10 @@ button {
     transition-duration: 0.3s;
 }
 
+button:disabled {
+    background-color: #517394;
+}
+
 button:hover {
     background-color: #517394;
 }

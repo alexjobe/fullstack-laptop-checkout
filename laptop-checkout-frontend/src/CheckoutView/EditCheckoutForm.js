@@ -7,6 +7,7 @@ class EditCheckoutForm extends Component {
     super(props);
     this.state = {
       userName: this.props.checkout.userName,
+      userEmail: this.props.checkout.userEmail,
       mgrName: this.props.checkout.mgrName,
       dueDate: '',
       checkoutDate: '',
@@ -40,18 +41,19 @@ class EditCheckoutForm extends Component {
     // Create checkout object with updated form data
     var checkout = this.props.checkout;
       checkout.userName = this.state.userName;
+      checkout.userEmail = this.state.userEmail;
       checkout.mgrName = this.state.mgrName;
       checkout.dueDate = this.state.dueDate;
       checkout.checkoutDate = this.state.checkoutDate;
     // Update checkout
     if(this.props.checkout.returnDate) {
       // Check to make sure inputs are not empty
-      if(this.state.userName && this.state.mgrName && this.state.dueDate && this.state.checkoutDate && this.state.returnDate) {
+      if(this.state.userName && this.state.mgrName && this.state.dueDate && this.state.checkoutDate && this.state.returnDate && this.state.userEmail) {
         checkout.returnDate = this.state.returnDate;
         this.props.updateCheckout(checkout);
       }
     }
-    else if(this.state.userName && this.state.mgrName && this.state.dueDate && this.state.checkoutDate) {
+    else if(this.state.userName && this.state.mgrName && this.state.dueDate && this.state.checkoutDate && this.state.userEmail) {
         this.props.updateCheckout(checkout);
     }
   }
@@ -65,6 +67,12 @@ class EditCheckoutForm extends Component {
             value={this.state.userName}
             onChange={this.handleChange}
             placeholder='User Name'
+          />
+          <NameInput
+            name='userEmail'
+            value={this.state.userEmail}
+            onChange={this.handleChange}
+            placeholder='Email'
           />
           <NameInput
             name='mgrName'

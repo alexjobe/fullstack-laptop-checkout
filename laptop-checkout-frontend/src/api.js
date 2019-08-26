@@ -1,6 +1,7 @@
 const PORT = process.env.REACT_APP_BACKEND_PORT || 8080;
 const LAPTOP_URL = 'http://localhost:' + PORT + '/api/laptops/';
 const CHECKOUT_URL = 'http://localhost:' + PORT + '/api/checkouts/';
+const NOTIFY_URL = 'http://localhost:' + PORT + '/notify';
 
 // --------------------------------------------- //
 // API functions for making calls to the backend //
@@ -193,6 +194,30 @@ export async function removeCheckoutFromHistory(laptop_id, checkout_id){
 
   return fetch(deleteURL, {
     method: 'delete'
+  })
+  .then(resp => {
+    if(!resp.ok) {
+      if(resp.status >= 400 && resp.status < 500){
+        return resp.json().then(data => {
+          let err = {errorMessage: data.message};
+          throw err;
+        })
+      } else {
+        let err = {errorMessage: 'Error: Server is not responding'};
+        throw err;
+      }
+    }
+    return resp.json();
+  })
+}
+
+export async function notify(email) {
+  return fetch(NOTIFY_URL, {
+    method: 'post',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(email)
   })
   .then(resp => {
     if(!resp.ok) {

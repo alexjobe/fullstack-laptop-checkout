@@ -14,6 +14,7 @@ class LaptopListView extends Component {
     this.addLaptop = this.addLaptop.bind(this);
     this.updateLaptop = this.updateLaptop.bind(this);
     this.enableEditMode = this.enableEditMode.bind(this);
+    this.sortLaptops = this.sortLaptops.bind(this);
   }
 
   componentWillMount(){
@@ -22,7 +23,7 @@ class LaptopListView extends Component {
 
   async loadLaptops(){
     // Get all laptops and set state
-    let laptops = await apiCalls.getLaptops()
+    let laptops = await apiCalls.getLaptops();
     this.setState({laptops});
   }
 
@@ -56,9 +57,19 @@ class LaptopListView extends Component {
     this.setState({laptopToUpdate: laptop});
   }
 
+  // Sort laptops by leaseDate
+  sortLaptops(laptops) {
+    laptops.sort(function(a, b) {
+      return new Date(a.leaseDate) - new Date(b.leaseDate);
+    });
+    console.log(laptops);
+    return laptops;
+  }
+
   render(){
     // For each laptop in laptops, create a LaptopItem
-    const laptops = this.state.laptops.map((laptop) => (
+    var sortedLaptops = this.sortLaptops(this.state.laptops);
+    const laptops = sortedLaptops.map((laptop) => (
       <LaptopItem
         key={laptop._id}
         laptop={laptop}
