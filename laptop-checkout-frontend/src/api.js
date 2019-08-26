@@ -1,4 +1,4 @@
-const PORT = process.env.REACT_APP_BACKEND_PORT || 8080;
+var PORT = process.env.REACT_APP_BACKEND_PORT || 8080;
 const LAPTOP_URL = 'http://localhost:' + PORT + '/api/laptops/';
 const CHECKOUT_URL = 'http://localhost:' + PORT + '/api/checkouts/';
 const NOTIFY_URL = 'http://localhost:' + PORT + '/notify';

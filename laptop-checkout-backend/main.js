@@ -8,9 +8,11 @@ require('./app.js')
 
 let mainWindow = null
 
+urlString = 'http://localhost:' + process.env.PORT || 'http://localhost:8080/';
+
 function main() {
   mainWindow = new BrowserWindow()
-  mainWindow.loadURL(`http://localhost:8080/`)
+  mainWindow.loadURL(urlString);
   mainWindow.on('close', event => {
     mainWindow = null
   })
