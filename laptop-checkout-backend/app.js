@@ -3,12 +3,14 @@ var express = require('express'),
     bodyParser = require("body-parser"),
     methodOverride = require("method-override"),
     path = require("path"),
-    cors = require('cors');
+    cors = require('cors'),
+    dotenv = require('dotenv');
 
 const port = process.env.PORT || 8080;
 const frontendPath = '../laptop-checkout-frontend';
 
 // APP CONFIG
+dotenv.config(); // Configure environment variables (found in .env file)
 app.use(bodyParser.json()); // Required for POST routes
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));

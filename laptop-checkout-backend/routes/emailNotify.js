@@ -7,9 +7,9 @@ var express = require('express'),
 //                        /notify                       //
 //======================================================//
 
-var serverEmail = '';
-var serverEmailPassword = '';
-var serverEmailProvider = 'gmail';
+const serverEmail = process.env.EMAIL || '';
+const serverEmailPassword = process.env.EMAIL_PASSWORD || '';
+const serverEmailProvider = process.env.EMAIL_PROVIDER || '';
 
 var transporter = nodemailer.createTransport({
     service: serverEmailProvider,
