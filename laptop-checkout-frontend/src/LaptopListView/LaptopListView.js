@@ -17,7 +17,7 @@ class LaptopListView extends Component {
     this.sortLaptops = this.sortLaptops.bind(this);
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.loadLaptops();
   }
 

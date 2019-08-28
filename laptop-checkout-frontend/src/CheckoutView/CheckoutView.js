@@ -21,7 +21,7 @@ class CheckoutView extends Component {
     this.enableEditMode = this.enableEditMode.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.loadLaptop();
   }
 
