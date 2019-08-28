@@ -19,6 +19,9 @@ var checkoutSchema = new mongoose.Schema({
     },
     returnDate: {
         type: Date
+    },
+    lastEmailDate : {
+        type: Date
     }
 });
 

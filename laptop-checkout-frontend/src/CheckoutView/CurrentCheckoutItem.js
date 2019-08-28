@@ -17,11 +17,13 @@ class CurrentCheckoutItem extends Component {
   sendOverdueEmail() {
     apiCalls.notifyOverdue(this.props.laptop);
     this.setState({emailSent: true});
+    this.props.loadLaptop();
   }
 
   sendReminderEmail() {
     apiCalls.notify(this.props.laptop);
     this.setState({emailSent: true});
+    this.props.loadLaptop();
   }
 
   render() {
@@ -35,7 +37,11 @@ class CurrentCheckoutItem extends Component {
             Email: {this.props.checkout.userEmail} <br />
             Approved By: {this.props.checkout.mgrName} <br />
             Checked Out: {new Date(this.props.checkout.checkoutDate).toLocaleDateString('en-US', { timeZone: 'UTC' })} <br />
-            Due Date: {new Date(this.props.checkout.dueDate).toLocaleDateString('en-US', { timeZone: 'UTC' })}
+            Due Date: {new Date(this.props.checkout.dueDate).toLocaleDateString('en-US', { timeZone: 'UTC' })} <br />
+            { this.props.checkout.lastEmailDate ?
+              <span>Last Emailed On: {new Date(this.props.checkout.lastEmailDate).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
+              : ''
+            }
           </p>
         </div>
         {

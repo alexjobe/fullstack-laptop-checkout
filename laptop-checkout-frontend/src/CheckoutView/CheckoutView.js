@@ -13,6 +13,7 @@ class CheckoutView extends Component {
       laptop: {}, // The selected laptop
       checkoutToUpdate: null // Checkout that is selected for editing (initially null)
     }
+    this.loadLaptop = this.loadLaptop.bind(this);
     this.updateCheckoutHistory = this.updateCheckoutHistory.bind(this);
     this.updateCheckout = this.updateCheckout.bind(this);
     this.addCheckout = this.addCheckout.bind(this);
@@ -100,6 +101,7 @@ class CheckoutView extends Component {
               checkout={this.state.laptop.currentCheckout}
               onReturn={this.returnLaptop}
               onEdit={this.enableEditMode.bind(this, this.state.laptop.currentCheckout)}
+              loadLaptop={this.loadLaptop}
             /> : ''
           )
         }

@@ -10,6 +10,7 @@ const serverEmailProvider = process.env.EMAIL_PROVIDER || '';
 // emailSchedule defines when the server should send automated emails. Uses node-cron syntax, and
 // defaults to every Monday.
 const emailSchedule = process.env.EMAIL_SCHEDULE || '* * * * Monday';
+
 // emailNumWeeksAhead defines how many weeks ahead the server should send reminder emails. For example, 
 // a value of 2 means reminder emails will only be sent for laptops that are due in less than 2 weeks
 const emailNumWeeksAhead = process.env.EMAIL_NUM_WEEKS_AHEAD || 2;
@@ -82,6 +83,8 @@ exports.sendReminderEmail = function(laptop) {
             console.log('Email sent: ' + info.response);
         }
     });
+
+    updateLastEmailDate(laptop);
 }
 
 exports.sendOverdueEmail = function(laptop) {
@@ -111,6 +114,20 @@ exports.sendOverdueEmail = function(laptop) {
         } else {
             console.log('Email sent: ' + info.response);
         }
+    });
+
+    updateLastEmailDate(laptop);
+}
+
+// Update lastEmailDate, to track the last time an email was sent for this checkout
+function updateLastEmailDate(laptop) {
+    db.Checkout.findById(laptop.currentCheckout._id)
+    .then(function(checkout) {
+        checkout.lastEmailDate = Date.now();
+        checkout.save();
+    })
+    .catch(function(err){
+        console.log(err);
     });
 }
 
