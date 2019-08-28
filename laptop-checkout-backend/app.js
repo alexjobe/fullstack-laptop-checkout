@@ -10,11 +10,16 @@ var express = require('express'),
 dotenv.config(); // Configure environment variables (found in .env file)
 const port = process.env.PORT || 8080;
 const frontendPath = '../laptop-checkout-frontend';
+
 app.use(bodyParser.json()); // Required for POST routes
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(cors()); // Required for React frontend to connect to API
 app.use(express.static(path.join(frontendPath, 'build')));
+
+// Sets up automatic email updates
+emailScheduler = require('./utils/emailScheduler');
+emailScheduler.schedule.start();
 
 // ========== REQUIRE ROUTES ========== //
 var laptopRoutes = require("./routes/laptops");

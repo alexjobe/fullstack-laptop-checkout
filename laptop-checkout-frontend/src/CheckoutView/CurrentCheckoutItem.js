@@ -15,45 +15,13 @@ class CurrentCheckoutItem extends Component {
   }
 
   sendOverdueEmail() {
-    var dueDate = new Date(this.props.checkout.dueDate).toLocaleDateString('en-US', { timeZone: 'UTC' });
-    var checkoutDate = new Date(this.props.checkout.checkoutDate).toLocaleDateString('en-US', { timeZone: 'UTC' });
-    var message = 'Hello ' + this.props.checkout.userName + ',\n\n' +
-    'The laptop you checked out was due ' +  dueDate + 
-    '. Please return it to the MAI Animal Health IT department.\n\n' +
-    '***Checkout Summary***\n\n' +
-    'Laptop: ' + this.props.laptop + '\n' + 
-    'Checked Out: ' + checkoutDate + '\n' +
-    'Due Date: ' + dueDate;
-
-    var email = {
-      email: this.props.checkout.userEmail,
-      subject: 'Laptop Overdue Notice',
-      message: message
-    }
+    apiCalls.notifyOverdue(this.props.laptop);
     this.setState({emailSent: true});
-
-    apiCalls.notify(email);
   }
 
   sendReminderEmail() {
-    var dueDate = new Date(this.props.checkout.dueDate).toLocaleDateString('en-US', { timeZone: 'UTC' });
-    var checkoutDate = new Date(this.props.checkout.checkoutDate).toLocaleDateString('en-US', { timeZone: 'UTC' });
-    var message = 'Hello ' + this.props.checkout.userName + ',\n\n' +
-    'The laptop you checked out will be due ' +  dueDate + 
-    '. Please return it to the MAI Animal Health IT department before then.\n\n' +
-    '***Checkout Summary***\n\n' +
-    'Laptop: ' + this.props.laptop + '\n' + 
-    'Checked Out: ' + checkoutDate + '\n' +
-    'Due Date: ' + dueDate;
-
-    var email = {
-      email: this.props.checkout.userEmail,
-      subject: 'Laptop Due Date Reminder',
-      message: message
-    }
+    apiCalls.notify(this.props.laptop);
     this.setState({emailSent: true});
-
-    apiCalls.notify(email);
   }
 
   render() {

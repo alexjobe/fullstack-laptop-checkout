@@ -96,7 +96,7 @@ class CheckoutView extends Component {
         { // If there is a currentCheckout and NOT a checkoutToUpdate, render CurrentCheckoutItem
           (this.state.laptop.currentCheckout && !this.state.checkoutToUpdate ?
             <CurrentCheckoutItem
-              laptop={this.state.laptop.name}
+              laptop={this.state.laptop}
               checkout={this.state.laptop.currentCheckout}
               onReturn={this.returnLaptop}
               onEdit={this.enableEditMode.bind(this, this.state.laptop.currentCheckout)}
