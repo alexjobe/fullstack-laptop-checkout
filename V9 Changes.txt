@@ -1,13 +1,21 @@
+V9 Changes - 8/28/19
+
+- Introduce dotenv and environment variables
+- Add emailScheduler, which automatically sends reminder emails at a specified time interval
+- Save and display lastEmailDate, to track the last time an email was sent for the specified
+checkout
+- Prevent checkout view from loading before laptop is set in state
+
+---------------------------------------------------------------------------------------------------
+
 V8 Changes - 8/22/19
 
 - Handle the case where a user deletes the checkout currently being edited
 - Replace laptop serial code with lease date
 - Add the ability to send email notifications to users who have checked out laptops, including
 due date reminders and overdue notifications
-- Sort laptops by lease date in laptop  list
+- Sort laptops by lease date in laptop list
 - Remove production folder because it was redundant
-
----------------------------------------------------------------------------------------------------
 
 V7 Changes - 8/1/19
 

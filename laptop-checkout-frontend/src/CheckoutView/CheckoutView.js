@@ -10,7 +10,7 @@ class CheckoutView extends Component {
   constructor(props){
     super(props);
     this.state = {
-      laptop: {}, // The selected laptop
+      laptop: null, // The selected laptop
       checkoutToUpdate: null // Checkout that is selected for editing (initially null)
     }
     this.loadLaptop = this.loadLaptop.bind(this);
@@ -74,7 +74,7 @@ class CheckoutView extends Component {
     this.setState({checkoutToUpdate: null})
   }
 
-  render(){
+  renderCheckoutView() {
     return (
       <section id="checkoutView">
         {/* deselectLaptop() is passed from App. When BackButton is clicked, 
@@ -121,6 +121,19 @@ class CheckoutView extends Component {
         /> 
       </section>
     )
+  }
+
+  render(){
+    if(this.state.laptop) { 
+      return this.renderCheckoutView() 
+    } else {
+      return (
+        <section id="checkoutView">
+          <BackButton onClick={this.props.deselectLaptop}></BackButton>
+          <h1>Loading...</h1>
+        </section>
+      )
+    }
   }
 }
 

@@ -14,14 +14,14 @@ class CurrentCheckoutItem extends Component {
     this.sendReminderEmail = this.sendReminderEmail.bind(this);
   }
 
-  sendOverdueEmail() {
-    apiCalls.notifyOverdue(this.props.laptop);
+  async sendOverdueEmail() {
+    await apiCalls.notifyOverdue(this.props.laptop);
     this.setState({emailSent: true});
     this.props.loadLaptop();
   }
 
-  sendReminderEmail() {
-    apiCalls.notify(this.props.laptop);
+  async sendReminderEmail() {
+    await apiCalls.notify(this.props.laptop);
     this.setState({emailSent: true});
     this.props.loadLaptop();
   }
@@ -37,13 +37,13 @@ class CurrentCheckoutItem extends Component {
             Email: {this.props.checkout.userEmail} <br />
             Approved By: {this.props.checkout.mgrName} <br />
             Checked Out: {new Date(this.props.checkout.checkoutDate).toLocaleDateString('en-US', { timeZone: 'UTC' })} <br />
-            Due Date: {new Date(this.props.checkout.dueDate).toLocaleDateString('en-US', { timeZone: 'UTC' })} <br />
-            { this.props.checkout.lastEmailDate ?
-              <span>Last Emailed On: {new Date(this.props.checkout.lastEmailDate).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
-              : ''
-            }
+            Due Date: {new Date(this.props.checkout.dueDate).toLocaleDateString('en-US', { timeZone: 'UTC' })} <br /> <br />
           </p>
         </div>
+        { this.props.checkout.lastEmailDate ?
+          <i>Last Notified On: {new Date(this.props.checkout.lastEmailDate).toLocaleDateString('en-US', { timeZone: 'UTC' })}</i>
+          : ''
+        }
         {
           !this.state.emailSent && new Date(this.props.checkout.dueDate) < Date.now() ?
             <button id="emailButton" onClick={this.sendOverdueEmail}>Send Overdue Notice</button>
