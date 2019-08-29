@@ -15,8 +15,7 @@ class CheckoutHistory extends Component {
     // Delete checkout
     await apiCalls.removeCheckout(checkoutId);
     // Update state in CheckoutView
-    const checkouts = this.props.laptop.checkoutHistory.filter(checkout => checkout._id !== checkoutId);
-    this.props.updateCheckoutHistory(checkouts);
+    this.props.updateCheckoutHistory();
   }
   
   renderCheckoutList(checkoutHistory) {
@@ -24,6 +23,11 @@ class CheckoutHistory extends Component {
     if(this.props.laptop.currentCheckout) {
       checkoutHistory = checkoutHistory.filter(checkout => checkout._id !== this.props.laptop.currentCheckout._id);
     }
+    
+    // Show most recent checkouts first
+    checkoutHistory.sort(function(a, b) {
+      return new Date(b.returnDate) - new Date(a.returnDate);
+    });
 
     // For each checkout in checkoutHistory, render a CheckoutHistoryItem
     const checkoutList = checkoutHistory.map((checkout) => (
@@ -45,23 +49,7 @@ class CheckoutHistory extends Component {
   }
   
   render(){
-    // Only render checkout history if laptop's checkoutHistory isn't empty, AND it contains checkouts besides the
-    // currentCheckout
-    if(this.props.laptop.checkoutHistory && this.props.laptop.checkoutHistory.length > 0){
-      if(!this.props.laptop.currentCheckout) {
-        return (
-          this.renderCheckoutList(this.props.laptop.checkoutHistory)
-        )
-      }
-      if(this.props.laptop.currentCheckout && this.props.laptop.checkoutHistory.length > 1) {
-        return (
-          this.renderCheckoutList(this.props.laptop.checkoutHistory)
-        )
-      }
-    }
-    return (
-      <div></div>
-    )
+    return this.renderCheckoutList(this.props.laptop.checkoutHistory);
   }
 }
   

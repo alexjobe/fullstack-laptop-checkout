@@ -114,7 +114,7 @@ in environment variables)
 How To Install MongoDB Locally:
 	https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mdb-edition
 
-This app uses Mongoose to model data: schemas are defined under laptop-checkout-backend/models (laptop.js and 
+This app uses Mongoose to model data: schemas are defined under 'laptop-checkout-backend/models' (laptop.js and 
 checkout.js)
 
 -----------------------------------------------------------------------------------------------------------------------

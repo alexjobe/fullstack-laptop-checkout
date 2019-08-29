@@ -14,7 +14,7 @@ class EditLaptopForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Set state with formatted dates
     if(this.props.laptop.leaseDate) {
       this.setState({leaseDate: new Date(this.props.laptop.leaseDate).toISOString().substring(0, 10)});

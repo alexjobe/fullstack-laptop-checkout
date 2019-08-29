@@ -77,13 +77,16 @@ router.put("/:laptopId", function(req, res){
     // Mongo populates currentCheckout based on ObjectID
     db.Laptop.findOneAndUpdate({_id: req.params.laptopId}, req.body, {new: true}).populate('currentCheckout').populate('checkoutHistory') // {new: true} respond with updated data
     .then(function(laptop){
-        if(req.body.currentCheckout) { // If there is a currentCheckout, set isCheckedOut to true
+        if(laptop.currentCheckout) { // If there is a currentCheckout, set isCheckedOut to true
             laptop.isCheckedOut = true;
-            laptop.checkoutHistory.push(req.body.currentCheckout); // Add checkout to checkoutHistory array
+            if(!laptop.checkoutHistory.includes(laptop.currentCheckout)) {
+                laptop.checkoutHistory.push(laptop.currentCheckout) // Add checkout to checkoutHistory array
+                const historySet = new Set(laptop.checkoutHistory); // Convert to set to make sure there are no duplicates
+                laptop.checkoutHistory = [...historySet];
+            }
             laptop.save(); // Save the laptop because we updated checkoutHistory
         }
-        else if(req.body.currentCheckout == null) { // If currentCheckout is null, set isCheckedOut to false
-            laptop.currentCheckout = null;
+        else if(laptop.currentCheckout == null) { // If currentCheckout is null, set isCheckedOut to false
             laptop.isCheckedOut = false;
             laptop.save();
         }

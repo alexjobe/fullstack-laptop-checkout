@@ -11,14 +11,17 @@ class CheckoutView extends Component {
     super(props);
     this.state = {
       laptop: null, // The selected laptop
-      checkoutToUpdate: null // Checkout that is selected for editing (initially null)
+      checkoutToUpdate: null, // Checkout that is selected for editing (initially null)
+      viewHistory: false
     }
     this.loadLaptop = this.loadLaptop.bind(this);
-    this.updateCheckoutHistory = this.updateCheckoutHistory.bind(this);
     this.updateCheckout = this.updateCheckout.bind(this);
     this.addCheckout = this.addCheckout.bind(this);
     this.returnLaptop = this.returnLaptop.bind(this);
     this.enableEditMode = this.enableEditMode.bind(this);
+    this.disableEditMode = this.disableEditMode.bind(this);
+    this.enableViewHistory = this.enableViewHistory.bind(this);
+    this.disableViewHistory = this.disableViewHistory.bind(this);
   }
 
   componentDidMount() {
@@ -47,12 +50,6 @@ class CheckoutView extends Component {
     this.setState({laptop: updatedLaptop});
   }
 
-  async updateCheckoutHistory(checkouts){
-    // Set laptop's checkoutHistory to checkouts, and update state
-    let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, checkoutHistory: checkouts}); // ... is the spread operator
-    this.setState({laptop: updatedLaptop});
-  }
-
   async enableEditMode(checkout){
     // Set checkoutToUpdate to checkout
     if(!this.state.checkoutToUpdate) {
@@ -60,16 +57,23 @@ class CheckoutView extends Component {
     }
   }
 
+  async disableEditMode(){
+    this.setState({checkoutToUpdate: null});
+  }
+
+  async enableViewHistory() {
+    this.setState({viewHistory: true})
+  }
+
+  async disableViewHistory() {
+    this.setState({viewHistory: false})
+  }
+
   async updateCheckout(checkout){
     // Update checkout
-    let updatedCheckout = await apiCalls.updateCheckout(checkout);
-    if(updatedCheckout && updatedCheckout.returnDate){ // If we are editing the current checkout, we do not want to add it to checkoutHistory yet
-      const checkouts = this.state.laptop.checkoutHistory.map(checkout => {
-        return (checkout._id === updatedCheckout._id ? updatedCheckout : checkout);
-      });
-      // Update checkoutHistory to reflect updated checkout
-      this.updateCheckoutHistory(checkouts); 
-    }
+    await apiCalls.updateCheckout(checkout);
+    // Update checkoutHistory to reflect updated checkout
+    this.loadLaptop();
     // Set checkoutToUpdate to null
     this.setState({checkoutToUpdate: null})
   }
@@ -86,16 +90,8 @@ class CheckoutView extends Component {
             : 'N/A'
           }
         </h3>
-        { // If there is a checkoutToUpdate, render EditCheckoutForm
-          (this.state.checkoutToUpdate ?
-            <EditCheckoutForm
-              updateCheckout={this.updateCheckout}
-              checkout={this.state.checkoutToUpdate}
-            /> : ''
-          )
-        }
         { // If there is a currentCheckout and NOT a checkoutToUpdate, render CurrentCheckoutItem
-          (this.state.laptop.currentCheckout && !this.state.checkoutToUpdate ?
+          (this.state.laptop.currentCheckout ?
             <CurrentCheckoutItem
               laptop={this.state.laptop}
               checkout={this.state.laptop.currentCheckout}
@@ -107,26 +103,66 @@ class CheckoutView extends Component {
         }
         { // If there is NOT a currentCheckout and NOT a checkoutToUpdate, render CheckoutForm to add new checkout
           (
-            !this.state.laptop.currentCheckout && !this.state.checkoutToUpdate ?
+            !this.state.laptop.currentCheckout ?
             <CheckoutForm
               addCheckout={this.addCheckout}
             /> : ''
           )
         }
-        {/* Render the laptop's checkout history*/}
+        <button id="historyButton" onClick={this.enableViewHistory}>Checkout History</button>
+      </section>
+    )
+  }
+
+  renderUpdateCheckoutView() {
+    return(
+      <section id="checkoutView">
+        <BackButton onClick={this.disableEditMode}></BackButton>
+        <h1>Laptop: {this.state.laptop.name}</h1>
+        <h3>
+          Lease Date: {this.state.laptop.leaseDate ? new Date(this.state.laptop.leaseDate).toLocaleDateString('en-US', { timeZone: 'UTC' })
+            : 'N/A'
+          }
+        </h3>
+        <EditCheckoutForm
+          updateCheckout={this.updateCheckout}
+          checkout={this.state.checkoutToUpdate}
+        />
+      </section>
+    )
+  }
+
+  renderHistoryView() {
+    /* Render the laptop's checkout history*/
+    return(
+      <section id="checkoutView">
+        <BackButton onClick={this.disableViewHistory}></BackButton>
+        <h1>Laptop: {this.state.laptop.name}</h1>
+        <h3>
+          Lease Date: {this.state.laptop.leaseDate ? new Date(this.state.laptop.leaseDate).toLocaleDateString('en-US', { timeZone: 'UTC' })
+            : 'N/A'
+          }
+        </h3>
         <CheckoutHistory 
           laptop={this.state.laptop} 
-          updateCheckoutHistory={this.updateCheckoutHistory} 
+          updateCheckoutHistory={this.loadLaptop} 
           enableEditMode={this.enableEditMode}
-        /> 
+        />
       </section>
     )
   }
 
   render(){
-    if(this.state.laptop) { 
-      return this.renderCheckoutView() 
-    } else {
+    if(this.state.laptop && !this.state.viewHistory && !this.state.checkoutToUpdate) { 
+      return this.renderCheckoutView();
+    }
+    else if(this.state.laptop && this.state.viewHistory && !this.state.checkoutToUpdate) {
+      return this.renderHistoryView();
+    }
+    else if(this.state.laptop && this.state.checkoutToUpdate) {
+      return this.renderUpdateCheckoutView();
+    }
+    else {
       return (
         <section id="checkoutView">
           <BackButton onClick={this.props.deselectLaptop}></BackButton>

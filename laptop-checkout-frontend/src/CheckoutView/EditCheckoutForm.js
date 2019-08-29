@@ -18,7 +18,7 @@ class EditCheckoutForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Set state with formatted dates
     if(this.props.checkout.dueDate) {
       this.setState({dueDate: new Date(this.props.checkout.dueDate).toISOString().substring(0, 10)});

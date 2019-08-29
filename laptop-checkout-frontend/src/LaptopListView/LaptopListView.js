@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LaptopItem from './LaptopItem';
+import LaptopListItem from './LaptopListItem';
 import LaptopForm from './LaptopForm';
 import * as apiCalls from '../api';
 import EditLaptopForm from './EditLaptopForm';
@@ -60,9 +60,12 @@ class LaptopListView extends Component {
   // Sort laptops by leaseDate
   sortLaptops(laptops) {
     laptops.sort(function(a, b) {
-      return new Date(a.leaseDate) - new Date(b.leaseDate);
+      // If a laptop doesn't have a leaseDate, it should be at the bottom of the list
+      if(a.leaseDate && b.leaseDate) {
+        return new Date(a.leaseDate) - new Date(b.leaseDate);
+      }
+      return new Date(b.leaseDate) - new Date(a.leaseDate);
     });
-    console.log(laptops);
     return laptops;
   }
 
@@ -70,7 +73,7 @@ class LaptopListView extends Component {
     // For each laptop in laptops, create a LaptopItem
     var sortedLaptops = this.sortLaptops(this.state.laptops);
     const laptops = sortedLaptops.map((laptop) => (
-      <LaptopItem
+      <LaptopListItem
         key={laptop._id}
         laptop={laptop}
         onDelete={this.deleteLaptop.bind(this, laptop._id)}

@@ -13,13 +13,13 @@ const nameStyle = {
 };
 
 const dateStyle = {
-  flex:'1',
+  flex:'.7',
   textAlign:'left',
   width: '100%'
 };
 
 const dueDateStyle = {
-  flex:'1',
+  flex:'.5',
   textAlign:'left',
   padding:'0 40px',
   width: '100%'
