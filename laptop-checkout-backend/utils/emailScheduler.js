@@ -64,7 +64,8 @@ exports.sendReminderEmail = function(laptop) {
     '***Checkout Summary***\n\n' +
     'Laptop: ' + laptop.name + '\n' + 
     'Checked Out: ' + checkoutDate + '\n' +
-    'Due Date: ' + dueDate;
+    'Due Date: ' + dueDate + '\n\n' +
+    '[THIS IS AN AUTOMATED MESSAGE - PLEASE DO NOT REPLY]';
 
     var mailOptions = {
         from: {
@@ -96,7 +97,8 @@ exports.sendOverdueEmail = function(laptop) {
     '***Checkout Summary***\n\n' +
     'Laptop: ' + laptop.name + '\n' + 
     'Checked Out: ' + checkoutDate + '\n' +
-    'Due Date: ' + dueDate;
+    'Due Date: ' + dueDate + '\n\n' +
+    '[THIS IS AN AUTOMATED MESSAGE - PLEASE DO NOT REPLY]';
 
     var mailOptions = {
         from: {
