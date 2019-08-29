@@ -1,10 +1,11 @@
-V9 Changes - 8/28/19
+V9 Changes - 8/29/19
 
 - Introduce dotenv and environment variables
 - Add emailScheduler, which automatically sends reminder emails at a specified time interval
 - Save and display lastEmailDate, to track the last time an email was sent for the specified
 checkout
 - Prevent checkout view from loading before laptop is set in state
+- Render checkoutHistory in its own view, and sort history by returnDate
 
 ---------------------------------------------------------------------------------------------------
 
