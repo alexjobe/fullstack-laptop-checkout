@@ -142,7 +142,7 @@ web server.
 
 Running this command in the backend folder with Electron Packager will create 32-bit and 64-bit Windows applications:
 
-	electron-packager ../laptop-checkout-production laptop-checkout --platform=win32 --arch=all
+	electron-packager ../laptop-checkout-backend laptop-checkout --platform=win32 --arch=all
 
 Bear in mind that executables created with Electron Packager in this way are basically wrappers for a local Node.js
 web server. This is a good option if you do not intend to deploy the app on a permanent server, since the executable 
