@@ -16,19 +16,28 @@ class EditCheckoutForm extends Component {
   componentDidMount() {
     // Set state with formatted dates
     if(this.props.checkout.dueDate) {
-      this.setState({dueDate: new Date(this.props.checkout.dueDate).toISOString().substring(0, 10)});
+      this.setState(st => {
+        return {dueDate: new Date(this.props.checkout.dueDate).toISOString().substring(0, 10)};
+      });
     }
     if(this.props.checkout.checkoutDate) {
-      this.setState({checkoutDate: new Date(this.props.checkout.checkoutDate).toISOString().substring(0, 10)});
+      this.setState(st => {
+        return {checkoutDate: new Date(this.props.checkout.checkoutDate).toISOString().substring(0, 10)};
+      });
     }
     if(this.props.checkout.returnDate) {
-      this.setState({returnDate: new Date(this.props.checkout.returnDate).toISOString().substring(0, 10)});
+      this.setState(st => {
+        return {returnDate: new Date(this.props.checkout.returnDate).toISOString().substring(0, 10)};
+      });
     }
   }
 
   handleChange = (e) => {
     // [e.target.name] is a computed property name
-    this.setState({ [e.target.name]: e.target.value });
+    let newState = {[e.target.name]: e.target.value };
+    this.setState(st => {
+      return newState;
+    });
   }
 
   handleSubmit = (e) => {

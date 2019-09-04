@@ -13,7 +13,10 @@ class CheckoutForm extends Component {
 
   handleChange = (e) => {
     // [e.target.name] is a computed property name
-    this.setState({ [e.target.name]: e.target.value });
+    let newState = {[e.target.name]: e.target.value };
+    this.setState(st => {
+      return newState;
+    });
   }
 
   handleSubmit = (e) => {

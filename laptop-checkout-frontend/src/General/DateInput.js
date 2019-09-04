@@ -8,12 +8,16 @@ class DateInput extends Component {
 
   handleBlur = () => {
     // The onBlur DOM event occurs when an object loses focus
-    this.setState({dateHasFocus: false});
+    this.setState(st => {
+      return {dateHasFocus: false};
+    });
   }
 
   handleFocus = () => {
     // The onFocus DOM event occurs when an object has focus
-    this.setState({dateHasFocus: true});
+    this.setState(st => {
+      return {dateHasFocus: true};
+    });
   }
 
   render() {

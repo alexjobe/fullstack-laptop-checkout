@@ -18,13 +18,17 @@ class LaptopListView extends Component {
   loadLaptops = async() => {
     // Get all laptops and set state
     let laptops = await apiCalls.getLaptops();
-    this.setState({laptops});
+    this.setState(st => {
+      return {laptops};
+    });
   }
 
   addLaptop = async(val) => {
     // Create new laptop and update state
     let newLaptop = await apiCalls.createLaptop(val);
-    this.setState({laptops: [...this.state.laptops, newLaptop]})
+    this.setState(st => {
+      return {laptops: [...this.state.laptops, newLaptop]};
+    });
   }
 
   updateLaptop = async(laptop) => {
@@ -34,8 +38,9 @@ class LaptopListView extends Component {
     const laptops = this.state.laptops.map(laptop => {
       return (laptop === updatedLaptop._id ? updatedLaptop : laptop);
     });
-    this.setState({laptops: laptops})
-    this.setState({laptopToUpdate: null})
+    this.setState(st => {
+      return {laptops: laptops, laptopToUpdate: null};
+    });
   }
 
   deleteLaptop = async(id) => {
@@ -43,12 +48,16 @@ class LaptopListView extends Component {
     await apiCalls.removeLaptop(id);
     // Update state to reflect deletion
     const laptops = this.state.laptops.filter(laptop => laptop._id !== id);
-    this.setState({laptops: laptops});
+    this.setState(st => {
+      return {laptops: laptops};
+    });
   }
 
   enableEditMode = async(laptop) => {
     // Set laptopToUpdate to laptop
-    this.setState({laptopToUpdate: laptop});
+    this.setState(st => {
+      return {laptopToUpdate: laptop};
+    });
   }
 
   // Sort laptops by leaseDate

@@ -21,7 +21,9 @@ class CheckoutView extends Component {
   loadLaptop = async() => {
     // Get the selected laptop object, based on the laptopId passed from App
     let laptop = await apiCalls.getLaptop(this.props.laptopId);
-    this.setState({laptop});
+    this.setState(st => {
+      return {laptop};
+    });
   }
 
   addCheckout = async(checkout) =>{
@@ -29,7 +31,9 @@ class CheckoutView extends Component {
     let newCheckout = await apiCalls.createCheckout({...checkout});
     // Update laptop's currentCheckout to newCheckout, and update state
     let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, currentCheckout: newCheckout}); // ... is the spread operator
-    this.setState({laptop: updatedLaptop});
+    this.setState(st => {
+      return {laptop: updatedLaptop};
+    });
   }
 
   returnLaptop = async() => {
@@ -37,26 +41,36 @@ class CheckoutView extends Component {
     await apiCalls.updateCheckout({...this.state.laptop.currentCheckout, returnDate: Date.now()});
     // Set laptop's currentCheckout to null, and update state
     let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, currentCheckout: null}); // ... is the spread operator
-    this.setState({laptop: updatedLaptop});
+    this.setState(st => {
+      return {laptop: updatedLaptop};
+    });
   }
 
   enableEditMode = async(checkout) => {
     // Set checkoutToUpdate to checkout
     if(!this.state.checkoutToUpdate) {
-      this.setState({checkoutToUpdate: checkout});
+      this.setState(st => {
+        return {checkoutToUpdate: checkout};
+      });
     }
   }
 
   disableEditMode = async() => {
-    this.setState({checkoutToUpdate: null});
+    this.setState(st => {
+      return {checkoutToUpdate: null};
+    });
   }
 
   enableViewHistory = async() => {
-    this.setState({viewHistory: true})
+    this.setState(st => {
+      return {viewHistory: true};
+    });
   }
 
   disableViewHistory = async() => {
-    this.setState({viewHistory: false})
+    this.setState(st => {
+      return {viewHistory: false};
+    });
   }
 
   updateCheckout = async(checkout) => {
@@ -65,7 +79,9 @@ class CheckoutView extends Component {
     // Update checkoutHistory to reflect updated checkout
     this.loadLaptop();
     // Set checkoutToUpdate to null
-    this.setState({checkoutToUpdate: null})
+    this.setState(st => {
+      return {checkoutToUpdate: null};
+    });
   }
 
   renderCheckoutView() {

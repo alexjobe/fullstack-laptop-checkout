@@ -12,13 +12,18 @@ class EditLaptopForm extends Component {
   componentDidMount() {
     // Set state with formatted dates
     if(this.props.laptop.leaseDate) {
-      this.setState({leaseDate: new Date(this.props.laptop.leaseDate).toISOString().substring(0, 10)});
+      this.setState(st => {
+        return {leaseDate: new Date(this.props.laptop.leaseDate).toISOString().substring(0, 10)};
+      });
     }
   }
 
   handleChange = (e) => {
     // [e.target.name] is a computed property name
-    this.setState({ [e.target.name]: e.target.value });
+    let newState = {[e.target.name]: e.target.value };
+    this.setState(st => {
+      return newState;
+    });
   }
 
   handleSubmit = (e) => {
@@ -34,10 +39,12 @@ class EditLaptopForm extends Component {
     }
 
     // Clear form
-    this.setState({
-      laptopName: '',
-      leaseDate: ''
-    })
+    this.setState(st => {
+      return {
+        laptopName: '',
+        leaseDate: ''
+      };
+    });
   }
 
   render() {

@@ -11,7 +11,10 @@ class LaptopForm extends Component {
 
   handleChange = (e) => {
     // [e.target.name] is a computed property name
-    this.setState({ [e.target.name]: e.target.value });
+    let newState = {[e.target.name]: e.target.value };
+    this.setState(st => {
+      return newState;
+    });
   }
 
   handleSubmit = (e) => {
@@ -22,10 +25,12 @@ class LaptopForm extends Component {
       leaseDate: this.state.leaseDate
     }
     // Clear form
-    this.setState({
-      laptopName: '',
-      leaseDate: ''
-    })
+    this.setState(st => {
+      return {
+        laptopName: '',
+        leaseDate: ''
+      };
+    });
     if(this.state.laptopName) {
       // Call addLaptop(), which is passed from LaptopListView as a prop
       this.props.addLaptop(laptop);

@@ -12,12 +12,16 @@ class App extends Component {
 
   selectLaptop = async (laptop) => {
     // Called when a laptop is selected in LaptopListView
-    this.setState({selectedLaptop: laptop});
+    this.setState(st => {
+      return {selectedLaptop: laptop};
+    });
   }
 
   deselectLaptop = async () => {
     // Called when BackButton is clicked in CheckoutView
-    this.setState({selectedLaptop: null});
+    this.setState(st => {
+      return {selectedLaptop: null};
+    });
   }
 
   renderLaptopListView() {

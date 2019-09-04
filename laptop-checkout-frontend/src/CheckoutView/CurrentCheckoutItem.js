@@ -9,13 +9,17 @@ class CurrentCheckoutItem extends Component {
 
   sendOverdueEmail = async() => {
     await apiCalls.notifyOverdue(this.props.laptop);
-    this.setState({emailSent: true});
+    this.setState(st => {
+      return {emailSent: true};
+    });
     this.props.loadLaptop();
   }
 
   sendReminderEmail = async() => {
     await apiCalls.notify(this.props.laptop);
-    this.setState({emailSent: true});
+    this.setState(st => {
+      return {emailSent: true}
+    });
     this.props.loadLaptop();
   }
 

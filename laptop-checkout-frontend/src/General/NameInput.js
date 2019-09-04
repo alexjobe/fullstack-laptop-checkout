@@ -8,12 +8,16 @@ class NameInput extends Component {
 
   handleBlur = () => {
     // The onBlur DOM event occurs when an object loses focus
-    this.setState({hasFocus: false});
+    this.setState(st => {
+      return {hasFocus: false};
+    });
   }
 
   handleFocus = () => {
     // The onFocus DOM event occurs when an object has focus
-    this.setState({hasFocus: true});
+    this.setState(st => {
+      return {hasFocus: true};
+    });
   }
 
   render() {
