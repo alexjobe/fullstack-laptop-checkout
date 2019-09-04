@@ -2,8 +2,8 @@
 ---------------------------------------------------- Laptop Checkout --------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------
 
-This app is built with a MERN stack, a collection of JavaScript-based technologies ó MongoDB, Express, React, and 
-Node.js ó used to develop web applications.
+This app is built with a MERN stack, a collection of JavaScript-based technologies ‚Äî MongoDB, Express, React, and 
+Node.js ‚Äî used to develop web applications.
 
 -----------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------- How To Install --------------------------------------------------
@@ -62,8 +62,8 @@ JSON-like documents with schema, which makes it great for JavaScript-based web a
 
 React is a lightweight JavaScript library for building single-page applications by dividing the UI into reusable 
 components. React only deals with the view layer, which provides clean abstraction in the MVC (Model-View-Controller) 
-design pattern. In addition, React speeds up DOM manipulation by only updating DOM objects that change in its ìvirtual 
-DOM.î You can find more information about the virtual DOM here:
+design pattern. In addition, React speeds up DOM manipulation by only updating DOM objects that change in its ‚Äúvirtual 
+DOM.‚Äù You can find more information about the virtual DOM here:
 
 	https://www.codecademy.com/articles/react-virtual-dom
 
