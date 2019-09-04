@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
 import CheckoutHistoryItem from './CheckoutHistoryItem';
 import * as apiCalls from '../api';
+import '../css/CheckoutHistory.css';
 
 class CheckoutHistory extends Component {
+
+  state = {
+    historyLength: 5
+  };
+
+  handleChange = (e) => {
+    // [e.target.name] is a computed property name
+    let newState = {[e.target.name]: e.target.value };
+    this.setState(st => {
+      return newState;
+    });
+  }
 
   deleteCheckout = async(checkoutId) => {
     // Remove checkout from selected laptop's history
@@ -24,6 +37,11 @@ class CheckoutHistory extends Component {
       return new Date(b.returnDate) - new Date(a.returnDate);
     });
 
+    // If historyLength is specified, only display that many history items
+    if(this.state.historyLength > 0) {
+      checkoutHistory = checkoutHistory.slice(0, this.state.historyLength);
+    }
+
     // For each checkout in checkoutHistory, render a CheckoutHistoryItem
     const checkoutList = checkoutHistory.map((checkout) => (
       <CheckoutHistoryItem
@@ -35,7 +53,21 @@ class CheckoutHistory extends Component {
     ));
     return (
       <div>
-        <h3 id="checkoutHistoryTitle">Checkout History</h3>
+        <h3 id="checkoutHistoryTitle">
+          Checkout History
+          {this.state.historyLength > 0 ? 
+            ' (Last ' + this.state.historyLength + ' Checkouts)'
+            : ' (All Checkouts)'
+          }
+        </h3>
+
+          <select id='historySelect' name='historyLength' onChange = {this.handleChange}>
+            <option value={5}>5 Checkouts</option>
+            <option value={10}>10 Checkouts</option>
+            <option value={20}>20 Checkouts</option>
+            <option value={0}>All Checkouts</option>
+          </select>
+
         <ul id="checkoutList">
           {checkoutList}
         </ul>

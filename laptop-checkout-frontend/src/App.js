@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LaptopListView from './LaptopListView/LaptopListView';
 import CheckoutView from './CheckoutView/CheckoutView';
-import './App.css';
+import './css/App.css';
 import './assets/font-awesome/css/font-awesome.min.css';
 
 class App extends Component {
