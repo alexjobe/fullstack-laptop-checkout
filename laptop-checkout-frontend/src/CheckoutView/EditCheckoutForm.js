@@ -3,20 +3,15 @@ import DateInput from '../General/DateInput';
 import NameInput from '../General/NameInput';
 
 class EditCheckoutForm extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      userName: this.props.checkout.userName,
-      userEmail: this.props.checkout.userEmail,
-      mgrName: this.props.checkout.mgrName,
-      dueDate: '',
-      checkoutDate: '',
-      returnDate: ''
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    userName: this.props.checkout.userName,
+    userEmail: this.props.checkout.userEmail,
+    mgrName: this.props.checkout.mgrName,
+    dueDate: '',
+    checkoutDate: '',
+    returnDate: ''
+  };
 
   componentDidMount() {
     // Set state with formatted dates
@@ -31,12 +26,12 @@ class EditCheckoutForm extends Component {
     }
   }
 
-  handleChange(e){
+  handleChange = (e) => {
     // [e.target.name] is a computed property name
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit(e){
+  handleSubmit = (e) => {
     e.preventDefault(); // Prevent form from reloading the page on submit
     // Create checkout object with updated form data
     var checkout = this.props.checkout;

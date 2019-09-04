@@ -3,25 +3,20 @@ import DateInput from '../General/DateInput';
 import NameInput from '../General/NameInput';
 
 class CheckoutForm extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      userName: '',
-      userEmail: '',
-      mgrName: '',
-      dueDate: ''
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    userName: '',
+    userEmail: '',
+    mgrName: '',
+    dueDate: ''
+  };
 
-  handleChange(e){
+  handleChange = (e) => {
     // [e.target.name] is a computed property name
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit(e){
+  handleSubmit = (e) => {
     e.preventDefault(); // Prevent form from reloading the page on submit
     // Create checkout object
     var checkout = {

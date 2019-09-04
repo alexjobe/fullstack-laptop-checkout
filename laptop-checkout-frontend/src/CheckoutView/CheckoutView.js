@@ -7,34 +7,24 @@ import BackButton from '../General/BackButton';
 import EditCheckoutForm from './EditCheckoutForm';
 
 class CheckoutView extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      laptop: null, // The selected laptop
-      checkoutToUpdate: null, // Checkout that is selected for editing (initially null)
-      viewHistory: false
-    }
-    this.loadLaptop = this.loadLaptop.bind(this);
-    this.updateCheckout = this.updateCheckout.bind(this);
-    this.addCheckout = this.addCheckout.bind(this);
-    this.returnLaptop = this.returnLaptop.bind(this);
-    this.enableEditMode = this.enableEditMode.bind(this);
-    this.disableEditMode = this.disableEditMode.bind(this);
-    this.enableViewHistory = this.enableViewHistory.bind(this);
-    this.disableViewHistory = this.disableViewHistory.bind(this);
+
+  state = {
+    laptop: null, // The selected laptop
+    checkoutToUpdate: null, // Checkout that is selected for editing (initially null)
+    viewHistory: false
   }
 
   componentDidMount() {
     this.loadLaptop();
   }
 
-  async loadLaptop() {
+  loadLaptop = async() => {
     // Get the selected laptop object, based on the laptopId passed from App
     let laptop = await apiCalls.getLaptop(this.props.laptopId);
     this.setState({laptop});
   }
 
-  async addCheckout(checkout){
+  addCheckout = async(checkout) =>{
     // Create new checkout, and set its laptop to currently selected laptop
     let newCheckout = await apiCalls.createCheckout({...checkout});
     // Update laptop's currentCheckout to newCheckout, and update state
@@ -42,7 +32,7 @@ class CheckoutView extends Component {
     this.setState({laptop: updatedLaptop});
   }
 
-  async returnLaptop(){
+  returnLaptop = async() => {
     // Update currentCheckout's returnDate
     await apiCalls.updateCheckout({...this.state.laptop.currentCheckout, returnDate: Date.now()});
     // Set laptop's currentCheckout to null, and update state
@@ -50,26 +40,26 @@ class CheckoutView extends Component {
     this.setState({laptop: updatedLaptop});
   }
 
-  async enableEditMode(checkout){
+  enableEditMode = async(checkout) => {
     // Set checkoutToUpdate to checkout
     if(!this.state.checkoutToUpdate) {
       this.setState({checkoutToUpdate: checkout});
     }
   }
 
-  async disableEditMode(){
+  disableEditMode = async() => {
     this.setState({checkoutToUpdate: null});
   }
 
-  async enableViewHistory() {
+  enableViewHistory = async() => {
     this.setState({viewHistory: true})
   }
 
-  async disableViewHistory() {
+  disableViewHistory = async() => {
     this.setState({viewHistory: false})
   }
 
-  async updateCheckout(checkout){
+  updateCheckout = async(checkout) => {
     // Update checkout
     await apiCalls.updateCheckout(checkout);
     // Update checkoutHistory to reflect updated checkout

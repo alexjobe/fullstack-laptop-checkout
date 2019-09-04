@@ -4,12 +4,7 @@ import * as apiCalls from '../api';
 
 class CheckoutHistory extends Component {
 
-  constructor(props){
-    super(props);
-    this.deleteCheckout = this.deleteCheckout.bind(this);
-  }
-
-  async deleteCheckout(checkoutId){
+  deleteCheckout = async(checkoutId) => {
     // Remove checkout from selected laptop's history
     await apiCalls.removeCheckoutFromHistory(this.props.laptop._id, checkoutId)
     // Delete checkout

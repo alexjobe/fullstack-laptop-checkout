@@ -3,24 +3,17 @@ import * as apiCalls from '../api';
 
 class CurrentCheckoutItem extends Component {
 
-  constructor(props){
-    super(props);
-
-    this.state = {
-      emailSent: false
-    }
-
-    this.sendOverdueEmail = this.sendOverdueEmail.bind(this);
-    this.sendReminderEmail = this.sendReminderEmail.bind(this);
+  state = {
+    emailSent: false
   }
 
-  async sendOverdueEmail() {
+  sendOverdueEmail = async() => {
     await apiCalls.notifyOverdue(this.props.laptop);
     this.setState({emailSent: true});
     this.props.loadLaptop();
   }
 
-  async sendReminderEmail() {
+  sendReminderEmail = async() => {
     await apiCalls.notify(this.props.laptop);
     this.setState({emailSent: true});
     this.props.loadLaptop();

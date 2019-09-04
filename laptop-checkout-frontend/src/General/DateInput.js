@@ -1,21 +1,17 @@
 import React, {Component} from 'react';
 
 class DateInput extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      dateHasFocus: false
-    };
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-  }
 
-  handleBlur() {
+  state = {
+    dateHasFocus: false
+  };
+
+  handleBlur = () => {
     // The onBlur DOM event occurs when an object loses focus
     this.setState({dateHasFocus: false});
   }
 
-  handleFocus() {
+  handleFocus = () => {
     // The onFocus DOM event occurs when an object has focus
     this.setState({dateHasFocus: true});
   }

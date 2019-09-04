@@ -3,16 +3,11 @@ import DateInput from '../General/DateInput';
 import NameInput from '../General/NameInput';
 
 class EditLaptopForm extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      laptopName: this.props.laptop.name,
-      leaseDate: this.props.laptop.leaseDate
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    laptopName: this.props.laptop.name,
+    leaseDate: this.props.laptop.leaseDate
+  };
 
   componentDidMount() {
     // Set state with formatted dates
@@ -21,12 +16,12 @@ class EditLaptopForm extends Component {
     }
   }
 
-  handleChange(e){
+  handleChange = (e) => {
     // [e.target.name] is a computed property name
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit(e){
+  handleSubmit = (e) => {
     e.preventDefault(); // Prevent form from reloading the page on submit
     // Update laptop object
     var laptop = this.props.laptop;

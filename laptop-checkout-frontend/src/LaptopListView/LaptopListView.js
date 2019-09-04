@@ -5,35 +5,29 @@ import * as apiCalls from '../api';
 import EditLaptopForm from './EditLaptopForm';
 
 class LaptopListView extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      laptops: [], // An array of all laptops to display in the list
-      laptopToUpdate: null // Laptop that is selected for editing (initially null)
-    }
-    this.addLaptop = this.addLaptop.bind(this);
-    this.updateLaptop = this.updateLaptop.bind(this);
-    this.enableEditMode = this.enableEditMode.bind(this);
-    this.sortLaptops = this.sortLaptops.bind(this);
+
+  state = {
+    laptops: [], // An array of all laptops to display in the list
+    laptopToUpdate: null // Laptop that is selected for editing (initially null)
   }
 
   componentDidMount(){
     this.loadLaptops();
   }
 
-  async loadLaptops(){
+  loadLaptops = async() => {
     // Get all laptops and set state
     let laptops = await apiCalls.getLaptops();
     this.setState({laptops});
   }
 
-  async addLaptop(val){
+  addLaptop = async(val) => {
     // Create new laptop and update state
     let newLaptop = await apiCalls.createLaptop(val);
     this.setState({laptops: [...this.state.laptops, newLaptop]})
   }
 
-  async updateLaptop(laptop){
+  updateLaptop = async(laptop) => {
     // Update laptop
     let updatedLaptop = await apiCalls.updateLaptop(laptop);
     // Find laptop in laptops and replace it with updatedLaptop
@@ -44,7 +38,7 @@ class LaptopListView extends Component {
     this.setState({laptopToUpdate: null})
   }
 
-  async deleteLaptop(id){
+  deleteLaptop = async(id) => {
     // Delete laptop
     await apiCalls.removeLaptop(id);
     // Update state to reflect deletion
@@ -52,13 +46,13 @@ class LaptopListView extends Component {
     this.setState({laptops: laptops});
   }
 
-  async enableEditMode(laptop){
+  enableEditMode = async(laptop) => {
     // Set laptopToUpdate to laptop
     this.setState({laptopToUpdate: laptop});
   }
 
   // Sort laptops by leaseDate
-  sortLaptops(laptops) {
+  sortLaptops = (laptops) => {
     laptops.sort(function(a, b) {
       // If a laptop doesn't have a leaseDate, it should be at the bottom of the list
       if(a.leaseDate && b.leaseDate) {

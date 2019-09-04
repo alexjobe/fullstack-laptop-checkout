@@ -5,21 +5,17 @@ import './App.css';
 import './assets/font-awesome/css/font-awesome.min.css';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      selectedLaptop: null // Set when a laptop is selected in LaptopListView
-    }
-    this.selectLaptop = this.selectLaptop.bind(this);
-    this.deselectLaptop = this.deselectLaptop.bind(this);
+
+  state = {
+    selectedLaptop: null // Set when a laptop is selected in LaptopListView
   }
 
-  async selectLaptop(laptop){
+  selectLaptop = async (laptop) => {
     // Called when a laptop is selected in LaptopListView
     this.setState({selectedLaptop: laptop});
   }
 
-  async deselectLaptop() {
+  deselectLaptop = async () => {
     // Called when BackButton is clicked in CheckoutView
     this.setState({selectedLaptop: null});
   }

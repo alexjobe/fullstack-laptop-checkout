@@ -1,21 +1,17 @@
 import React, {Component} from 'react';
 
 class NameInput extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      hasFocus: false
-    };
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-  }
 
-  handleBlur() {
+  state = {
+    hasFocus: false
+  };
+
+  handleBlur = () => {
     // The onBlur DOM event occurs when an object loses focus
     this.setState({hasFocus: false});
   }
 
-  handleFocus() {
+  handleFocus = () => {
     // The onFocus DOM event occurs when an object has focus
     this.setState({hasFocus: true});
   }
