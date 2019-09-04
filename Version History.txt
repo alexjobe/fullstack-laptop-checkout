@@ -1,3 +1,12 @@
+V10 Changes - 9/4/19
+
+- Replace component constructors with 'class properties proposal' for readability, and replace 
+explicit function bindings with arrow functions
+- Add callback functions when calling setState in React
+- Add dropdown to laptop history so users can select how many items should be displayed
+
+---------------------------------------------------------------------------------------------------
+
 V9 Changes - 8/29/19
 
 - Introduce dotenv and environment variables
@@ -6,8 +15,6 @@ V9 Changes - 8/29/19
 checkout
 - Prevent checkout view from loading before laptop is set in state
 - Render checkoutHistory in its own view, and sort history by returnDate
-
----------------------------------------------------------------------------------------------------
 
 V8 Changes - 8/22/19
 

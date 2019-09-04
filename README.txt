@@ -89,7 +89,7 @@ backend can be accessed at localhost:8080, and the frontend is at localhost:3000
 -------------------------------------------------- Frontend Structure -------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------
 
-The frontend was built with Create React App (CRA): an officially supported tool to help bootstrap React applications. 
+The frontend was built with Create React App (CRA), an officially supported tool to help bootstrap React applications. 
 All relevant files for the frontend (besides those created by CRA) are found in 'src'. The entry point for the React 
 frontend is App.js. React components are organized by view and separated into three folders: CheckoutView, 
 LaptopListView, and General. Functions for making calls to the backend are found in api.js.
