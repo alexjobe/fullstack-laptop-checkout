@@ -18,3 +18,8 @@ select#historySelect {
     white-space: nowrap;
     width: 300px;
  }
+
+#checkoutList {
+    height: 400px;
+    overflow: auto;
+}

@@ -55,6 +55,11 @@ p {
 	color: #2c3e50;
 }
 
+#laptopList {
+    height: 400px;
+    overflow: auto;
+}
+
 h2 span {
 	font-weight: 700;
 }

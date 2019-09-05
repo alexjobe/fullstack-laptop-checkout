@@ -110,9 +110,12 @@ class LaptopListView extends Component {
         <h1>MAI</h1>
         <h2><i className="fa fa-laptop"></i> laptop<span>checkout</span></h2>
         <Search search={this.searchLaptops}/>
-        <ul id="laptopList">
-          {laptops}
-        </ul>
+        { this.state.laptops && this.state.laptops.length > 0 ?
+          <ul id="laptopList">
+            {laptops}
+          </ul>
+          : <h3>No laptops found!</h3>
+        }
         {
           // If there is a laptopToUpdate, render EditLaptopForm. Otherwise, render LaptopForm for adding new laptops
           (this.state.laptopToUpdate ? 

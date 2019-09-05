@@ -118,7 +118,7 @@ router.delete("/:laptopId", function(req, res){
 router.get("/search/:query", function(req, res){
     var search_query = '.*' + req.params.query + '.*';
     // Find all laptops whose name contains the query string
-    db.Laptop.find({ 'name' : { $regex : search_query, $options : 'i' } })
+    db.Laptop.find({ 'name' : { $regex : search_query, $options : 'i' } }).populate('currentCheckout')
     .then(function(laptops){ // Promise instead of typical callback
         res.json(laptops);
     })
