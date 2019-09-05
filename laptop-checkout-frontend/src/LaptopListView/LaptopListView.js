@@ -3,6 +3,7 @@ import LaptopListItem from './LaptopListItem';
 import LaptopForm from './LaptopForm';
 import * as apiCalls from '../api';
 import EditLaptopForm from './EditLaptopForm';
+import Search from '../General/Search';
 
 class LaptopListView extends Component {
 
@@ -75,6 +76,20 @@ class LaptopListView extends Component {
     return laptops;
   }
 
+  searchLaptops = async(query) => {
+    if(query !== '') {
+      let matchingLaptops = await apiCalls.searchLaptops(query);
+      this.setState(st => {
+        return {laptops: matchingLaptops};
+      });
+    } else {
+      let allLaptops = await apiCalls.getLaptops();
+      this.setState(st => {
+        return {laptops: allLaptops};
+      });
+    }
+  }
+
   render(){
     // For each laptop in laptops, create a LaptopItem
     var sortedLaptops = this.sortLaptops(this.state.laptops);
@@ -93,7 +108,8 @@ class LaptopListView extends Component {
     return (
       <section id="laptopView">
         <h1>MAI</h1>
-        <h2><i className="fa fa-laptop"></i> laptop<span>checkout</span></h2> 
+        <h2><i className="fa fa-laptop"></i> laptop<span>checkout</span></h2>
+        <Search search={this.searchLaptops}/>
         <ul id="laptopList">
           {laptops}
         </ul>

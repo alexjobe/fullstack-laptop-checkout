@@ -258,3 +258,22 @@ export async function notifyOverdue(email) {
     return resp.json();
   })
 }
+
+export async function searchLaptops(query){
+  const getURL = LAPTOP_URL + 'search/' + query;
+  return fetch(getURL)
+  .then(resp => {
+    if(!resp.ok) {
+      if(resp.status >= 400 && resp.status < 500){
+        return resp.json().then(data => {
+          let err = {errorMessage: data.message};
+          throw err;
+        })
+      } else {
+        let err = {errorMessage: 'Error: Server is not responding'};
+        throw err;
+      }
+    }
+    return resp.json();
+  })
+}

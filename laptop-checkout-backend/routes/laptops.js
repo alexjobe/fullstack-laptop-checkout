@@ -114,4 +114,17 @@ router.delete("/:laptopId", function(req, res){
     });
 });
 
+// LAPTOP SEARCH - Get all laptops that match query. Search by name.
+router.get("/search/:query", function(req, res){
+    var search_query = '.*' + req.params.query + '.*';
+    // Find all laptops whose name contains the query string
+    db.Laptop.find({ 'name' : { $regex : search_query, $options : 'i' } })
+    .then(function(laptops){ // Promise instead of typical callback
+        res.json(laptops);
+    })
+    .catch(function(err){
+        res.send(err);
+    });
+});
+
 module.exports = router;
