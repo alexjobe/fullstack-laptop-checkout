@@ -4,7 +4,7 @@ var cron = require('node-cron'),
 
 // Credentials for Nodemailer
 const email = process.env.EMAIL || '';
-const emailUser = process.env.EMAIL_USER || '';
+const emailUser = process.env.EMAIL_ACCOUNT || '';
 const emailPassword = process.env.EMAIL_PASSWORD || '';
 const emailProvider = process.env.EMAIL_PROVIDER || '';
 const emailFrom = process.env.EMAIL_FROM || '';

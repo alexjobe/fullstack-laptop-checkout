@@ -1,11 +1,18 @@
+V11 Changes - 9/5/19
+
+- Update emailScheduler
+- Remove some side effects with pure functions
+- Add search bar to laptop list
+- Add scroll bar to lists
+
+---------------------------------------------------------------------------------------------------
+
 V10 Changes - 9/4/19
 
 - Replace component constructors with 'class properties proposal' for readability, and replace 
 explicit function bindings with arrow functions
 - Add callback functions when calling setState in React
 - Add dropdown to laptop history so users can select how many items should be displayed
-
----------------------------------------------------------------------------------------------------
 
 V9 Changes - 8/29/19
 

@@ -35,7 +35,11 @@ Environment variables can be used to configure the app when it is launched, or w
 
     CONNECTION_STRING: The MongoDB connection string (defaults to 'mongodb://localhost/laptop-checkout-api')
 
-                EMAIL: The email account used when sending email notifications (defaults to null)
+                EMAIL: The return email used in the 'from' field when sending email notifications (defaults to null)
+
+           EMAIL_FROM: The name used in the 'from' field when sending email notifications (defaults to null)
+
+        EMAIL_ACCOUNT: The email account used when sending email notifications (defaults to null)
 
        EMAIL_PASSWORD: The password for the email account (defaults to null)
 
@@ -163,5 +167,7 @@ For more information, check out:
 The email account information should be set with environment variables. For example:
 
 	EMAIL = 'myEmail@gmail.com'
+	EMAIL_FROM = 'IT Department'
+	EMAIL_ACCOUNT = 'myAccount'
 	EMAIL_PASSWORD = 'myPassword'
 	EMAIL_PROVIDER = 'gmail'
