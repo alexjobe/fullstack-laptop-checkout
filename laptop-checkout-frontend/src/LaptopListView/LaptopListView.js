@@ -36,7 +36,7 @@ class LaptopListView extends Component {
     let updatedLaptop = await apiCalls.updateLaptop(laptop);
     // Find laptop in laptops and replace it with updatedLaptop
     const laptops = this.state.laptops.map(laptop => {
-      return (laptop === updatedLaptop._id ? updatedLaptop : laptop);
+      return (laptop._id === updatedLaptop._id ? updatedLaptop : laptop);
     });
     this.setState(st => {
       return {laptops: laptops, laptopToUpdate: null};
@@ -55,8 +55,11 @@ class LaptopListView extends Component {
 
   enableEditMode = async(laptop) => {
     // Set laptopToUpdate to laptop
+    await this.setState(st => {
+      return {laptopToUpdate: null};
+    });
     this.setState(st => {
-      return {laptopToUpdate: laptop};
+      return {laptopToUpdate: {...laptop}};
     });
   }
 

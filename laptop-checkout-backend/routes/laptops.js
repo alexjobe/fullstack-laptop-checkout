@@ -80,9 +80,8 @@ router.put("/:laptopId", function(req, res){
         if(laptop.currentCheckout) { // If there is a currentCheckout, set isCheckedOut to true
             laptop.isCheckedOut = true;
             if(!laptop.checkoutHistory.includes(laptop.currentCheckout)) {
-                laptop.checkoutHistory.push(laptop.currentCheckout) // Add checkout to checkoutHistory array
-                const historySet = new Set(laptop.checkoutHistory); // Convert to set to make sure there are no duplicates
-                laptop.checkoutHistory = [...historySet];
+                let newHistory = [...laptop.checkoutHistory, laptop.currentCheckout]; // Add checkout to checkoutHistory array
+                laptop.checkoutHistory = newHistory;
             }
             laptop.save(); // Save the laptop because we updated checkoutHistory
         }

@@ -32,7 +32,7 @@ class CheckoutView extends Component {
     // Update laptop's currentCheckout to newCheckout, and update state
     let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, currentCheckout: newCheckout}); // ... is the spread operator
     this.setState(st => {
-      return {laptop: updatedLaptop};
+      return {laptop: {...updatedLaptop}};
     });
   }
 
@@ -42,7 +42,7 @@ class CheckoutView extends Component {
     // Set laptop's currentCheckout to null, and update state
     let updatedLaptop = await apiCalls.updateLaptop({...this.state.laptop, currentCheckout: null}); // ... is the spread operator
     this.setState(st => {
-      return {laptop: updatedLaptop};
+      return {laptop: {...updatedLaptop}};
     });
   }
 
@@ -50,7 +50,7 @@ class CheckoutView extends Component {
     // Set checkoutToUpdate to checkout
     if(!this.state.checkoutToUpdate) {
       this.setState(st => {
-        return {checkoutToUpdate: checkout};
+        return {checkoutToUpdate: {...checkout}};
       });
     }
   }
