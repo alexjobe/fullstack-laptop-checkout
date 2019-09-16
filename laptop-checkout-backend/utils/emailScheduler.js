@@ -11,7 +11,7 @@ const emailFrom = process.env.EMAIL_FROM || '';
 
 // emailSchedule defines when the server should send automated emails. Uses node-cron syntax, and
 // defaults to every Monday.
-const emailSchedule = process.env.EMAIL_SCHEDULE || '* * * * Monday';
+const emailSchedule = process.env.EMAIL_SCHEDULE || '0 8 * * Monday';
 
 // emailNumWeeksAhead defines how many weeks ahead the server should send reminder emails. For example, 
 // a value of 2 means reminder emails will only be sent for laptops that are due in less than 2 weeks

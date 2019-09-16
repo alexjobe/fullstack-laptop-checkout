@@ -35,7 +35,9 @@ Environment variables can be used to configure the app when it is launched, or w
 
     CONNECTION_STRING: The MongoDB connection string (defaults to 'mongodb://localhost/laptop-checkout-api')
 
-                EMAIL: The return email used in the 'from' field when sending email notifications (defaults to null)
+                EMAIL: The return email used in the 'from' field when sending email notifications. This does NOT have
+		       to be the same as the email account used, though it often is. This email is also CC'd whenever
+		       an email update is sent (defaults to null)
 
            EMAIL_FROM: The name used in the 'from' field when sending email notifications (defaults to null)
 
@@ -83,7 +85,7 @@ is executed in the frontend folder.
 
 The build folder is served by the backend via Node.js and Express, so you do not need to run 'npm start' in the 
 frontend folder on your production server. If changes are made to the frontend, just run 'npm run build' in the 
-frontend folder: this will create a new build folder.
+frontend folder to create a new build folder, and copy it to the backend folder.
 
 To run the app in development mode, you must run both the backend and frontend at the same time. Just run the command 
 'npm start' in both the backend and frontend folders, and navigate to localhost:3000 in a browser. By default, the 
@@ -130,29 +132,32 @@ checkout.js)
 Electron will launch the app in its own window, so there is no need to use a browser. Electron is a framework for 
 creating native applications with web technologies like JavaScript, HTML, and CSS.
 
-Electron Packager can be used to create Windows, Mac, and Linux executables. For more information, check out:
-
-	https://www.christianengvall.se/electron-packager-tutorial/ 
-
-After you create an executable with Electron Packager, you do not need to install Node.js. The only set-up required is 
-installing MongoDB, either locally or on a server (make sure the connection is specified *before* creating the 
-executable.)
-
 To disable Electron, open package.json and change 'main' to 'app.js', and 'start' to 'node .' Then connect to 
 localhost:8080 in a browser. Alternatively, just type 'node app.js'. This is required if you wish to host the app on a 
 web server.
 
 -----------------------------------------------------------------------------------------------------------------------
----------------------------------------------- Electron Packager Instructions -----------------------------------------
+----------------------------------------------- Electron Builder Instructions -----------------------------------------
 -----------------------------------------------------------------------------------------------------------------------
 
-Running this command in the backend folder with Electron Packager will create 32-bit and 64-bit Windows applications:
+Electron Builder can be used to build Windows, Mac, and Linux executables. For more information, check out:
 
-	electron-packager ../laptop-checkout-backend laptop-checkout --platform=win32 --arch=all
+	https://www.electron.build/
 
-Bear in mind that executables created with Electron Packager in this way are basically wrappers for a local Node.js
-web server. This is a good option if you do not intend to deploy the app on a permanent server, since the executable 
-does not require installation.
+After you create an executable with Electron Builder, you do not need to install Node.js. The only set-up required is 
+installing MongoDB, either locally or on a server (the connection can be specified by creating a .env file in the
+folder containing the executable.)
+
+Running this command in the backend folder with Electron Builder installed will create a Windows executable:
+
+	npm run dist
+
+The executable can be found in the folder called 'dist'. To set up environment variables, create a .env file in the
+folder containing the executable (or copy the existing one from the backend folder.) This allows you to alter the 
+database connection and email information without building a new application.
+
+Bear in mind that executables created with Electron Builder are basically wrappers for a local web server. This is a 
+good option if you do not intend to deploy the app on a permanent server.
 
 -----------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------- Email Notifications ----------------------------------------------

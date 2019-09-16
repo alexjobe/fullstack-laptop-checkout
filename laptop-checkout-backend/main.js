@@ -13,6 +13,7 @@ urlString = 'http://localhost:' + process.env.PORT || 'http://localhost:8080/';
 function main() {
   mainWindow = new BrowserWindow()
   mainWindow.loadURL(urlString);
+  //mainWindow.loadURL(`http://localhost:8080/`)
   mainWindow.on('close', event => {
     mainWindow = null
   })
