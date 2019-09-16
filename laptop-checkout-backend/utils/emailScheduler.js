@@ -28,6 +28,7 @@ var transporter = nodemailer.createTransport({
 
 // Sets up scheduled task to call sendEmails (according to emailSchedule)
 exports.schedule = cron.schedule(emailSchedule, () => {
+    console.log("Sending scheduled emails...")
     sendEmails();
 });
 
@@ -75,6 +76,7 @@ exports.sendReminderEmail = function(laptop) {
             address: email
         },
         to: laptop.currentCheckout.userEmail,
+        cc: email,
         subject: 'Laptop Due Date Reminder',
         text: message
     };
@@ -108,6 +110,7 @@ exports.sendOverdueEmail = function(laptop) {
             address: email
         },
         to: laptop.currentCheckout.userEmail,
+        cc: email,
         subject: 'Laptop Overdue Notice',
         text: message
     };
