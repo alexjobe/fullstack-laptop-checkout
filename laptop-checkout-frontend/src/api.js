@@ -1,7 +1,7 @@
-var PORT = process.env.REACT_APP_BACKEND_PORT || 8080;
-const LAPTOP_URL = 'http://localhost:' + PORT + '/api/laptops/';
-const CHECKOUT_URL = 'http://localhost:' + PORT + '/api/checkouts/';
-const NOTIFY_URL = 'http://localhost:' + PORT + '/notify/';
+var URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+const LAPTOP_URL = URL + '/api/laptops/';
+const CHECKOUT_URL = URL + '/api/checkouts/';
+const NOTIFY_URL = URL + '/notify/';
 
 // --------------------------------------------- //
 // API functions for making calls to the backend //

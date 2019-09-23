@@ -30,8 +30,8 @@ laptop-checkout-backend) and change 'main' to 'app.js', and 'start' to 'node .' 
 
 Environment variables can be used to configure the app when it is launched, or with a .env file. These include:
 
-                 PORT: The port that the backend is served on (defaults to 8080). If this is changed, you will also 
-		       need to change REACT_APP_BACKEND_PORT in the frontend to the same value.
+                 PORT: The port that the backend is served on (defaults to 8080). If this is changed, you will likely 
+		       need to update REACT_APP_BACKEND_URL in the frontend and rebuild.
 
     CONNECTION_STRING: The MongoDB connection string (defaults to 'mongodb://localhost/laptop-checkout-api')
 
@@ -53,6 +53,9 @@ Environment variables can be used to configure the app when it is launched, or w
 EMAIL_NUM_WEEKS_AHEAD: Defines how many weeks ahead the server should send reminder emails. For example, a value of 2 
                        means reminder emails will only be sent for laptops that are due in less than 2 weeks (defaults 
                        to 2)
+
+REACT_APP_BACKEND_URL: Set when building the frontend, this is the URL that the frontend uses to access the backend
+		       API (defaults to 'http://localhost:8080')
 
 -----------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------- The Backend -----------------------------------------------------

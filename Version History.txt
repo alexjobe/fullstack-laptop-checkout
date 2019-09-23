@@ -1,11 +1,17 @@
+V12 Changes - 9/16/19
+
+- Update app.js and package.json for use with electron-builder
+- Set emailScheduler to send automatic emails at 8 AM on Mondays
+- Add cc to email messages
+
+---------------------------------------------------------------------------------------------------
+
 V11 Changes - 9/5/19
 
 - Update emailScheduler
 - Remove some side effects with pure functions
 - Add search bar to laptop list
 - Add scroll bar to lists
-
----------------------------------------------------------------------------------------------------
 
 V10 Changes - 9/4/19
 
